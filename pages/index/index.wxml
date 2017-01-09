@@ -23,9 +23,9 @@
                 <text class="attend-label" wx:if="{{live.status == 30 || live.status == 35}}">
                   {{live.attendanceCount}} 人参与
                 </text>
-
               </view>
-          </view>
+        </view>
+
       </view>
 
   </view>

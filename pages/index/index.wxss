@@ -42,12 +42,19 @@
 }
 
 .live-item .live-info {
-	padding: 10px 20px;
-	height: 80px;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 70px;
+  right: 24px;
+  height: 80px;
 }
 
 .live-item .live-info .owner-name {
 	color: #6e6e6e;
+  display: block;
+  font-size: 14px;
 }
 
 .live-item .live-info p.subject {
