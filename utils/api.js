@@ -7,19 +7,20 @@ function request(path, method, params, successFn, failFn) {
     wx.request({
       url: baseUrl + path,
       data: data,
-      method: method, 
-      success: function(res){
-        console.log(res.data)
-        if (res.status == 'success') {
-          successFn(res.data)
+      method: method,
+      success: (res) => {
+        var resp = res.data
+        if (resp.status == 'success') {
+          successFn(resp.result)
         } else {
-          failFn(res.status, res.error)
+          failFn(resp.status, resp.error)
         }
       },
-      fail: function() {
+      fail: () => {
         failFn('network_error', res.error)
       },
-      complete: function() {
+      complete: () => {
+
       }
     })
 }
