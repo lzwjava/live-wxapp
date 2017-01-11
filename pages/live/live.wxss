@@ -1,0 +1,7 @@
+.live-view .num {
+  text-align: center;
+}
+
+.live-view .img {
+  width: 100%;
+}

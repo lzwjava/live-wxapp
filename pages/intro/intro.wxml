@@ -1,0 +1,55 @@
+<view class="intro-view">
+
+  <view class="cover-section">
+
+    <image class="cover" src="{{live.coverUrl}}" mode="aspectFill"></image>
+
+  </view>
+
+  <view class="header-section card-group">
+
+    <image class="avatar" src="{{live.owner.avatarUrl}}" mode="aspectFill"></image>
+
+    <view class="header-right">
+      <view class="subject">{{live.subject}}</view>
+      <view class="ownername">{{live.owner.username}}</view>
+    </view>
+
+    <view class="time-section">
+
+      <view class="right-corner">
+        <view class="status">
+            {{statusText}}
+        </view>
+
+      </view>
+
+      <view class="time-label">直播时间</view>
+      <view class="plan-time">{{live.planTs}}</view>
+
+    </view>
+
+  </view>
+
+  <view class="attend-summary-section card-group">
+    <view class="attend-info">
+      <ul class="attended-users">
+        <li class="avatar-cell" wx:for-item="u" wx:for="{{attendedUsers}}">
+          <image class="avatar" src="{{u.avatarUrl}}" mode="aspectFill"></image>
+        </li>
+      </ul>
+
+      <view class="attend-summary" bindtap="goUsers">
+        {{live.attendanceCount}}人已参与 >
+      </view>
+    </view>
+
+  </view>
+
+  <view class="attend-section">
+
+     <view class="attend-btn" bindtap="attendLive">{{btnTitle}}</view>
+
+  </view>
+
+</view>

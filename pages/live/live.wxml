@@ -1,0 +1,5 @@
+<view class="live-view">
+
+  <video src="http://live-cdn.quzhiboapp.com/live/abc.m3u8" controls></video>
+
+</view>

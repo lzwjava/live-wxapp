@@ -1,24 +1,4 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
 
 .lives {
   width: 100%;
@@ -27,38 +7,43 @@
 
 .live-item {
 	background-color: #fff;
-	height: 80px;
-	padding: 10px 10px;
+	height: 160rpx;
+	padding: 20rpx 20rpx;
 	position: relative;
-	border-bottom: 1px solid #eee;
+	border-bottom: 2rpx solid #eee;
 }
 
 .live-item .avatar {
-	width: 50px;
-	height: 50px;
+	width: 100rpx;
+	height: 100rpx;
 	display: inline-block;
-	margin-top: 15px;
+	margin-top: 30rpx;
   border-radius: 50%;
+  vertical-align: top;
 }
 
 .live-item .live-info {
   display: inline-block;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 70px;
-  right: 24px;
-  height: 80px;
+  position: relative;
+  width: 600rpx;
+  height: 160rpx;
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.live-item .live-info .live-item-tag {
+  height: 120rpx;
 }
 
 .live-item .live-info .owner-name {
 	color: #6e6e6e;
+  font-size: 28rpx;
   display: block;
-  font-size: 14px;
 }
 
 .live-item .live-info p.subject {
-	height: 30px;
+	height: 60rpx;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
@@ -69,29 +54,28 @@
 	color: #fff;
 	background-color: #00bdef;
 	border-color: #64b3f1;
-	border-radius: 3px;
-	font-size: 14px;
-	line-height: 18px;
-	padding: 3px 5px;
-	font-size: 14px;
+	border-radius: 6rpx;
+	font-size: 28rpx;
 }
 
 .live-item .live-info .time-label {
 	color: #00bdef;
 	border: 1px solid #00bdef;
-	border-radius: 3px;
-	padding: 2px 3px;
-	font-size: 14px;
+	border-radius: 6rpx;
+	padding: 4rpx 6rpx;
+	font-size: 28rpx;
 }
 
 .live-item .live-info .attend-label {
-	font-size: 14px;
+	font-size: 28rpx;
+  position: relative;
+  bottom: 50rpx;
 }
 
 .live-item .arrow {
 	float: right;
 	color: #cecee0;
-	width: 24px;
-	height: 24px;
-	margin-top: 25px;
+	width: 48rpx;
+	height: 48rpx;
+	margin-top: 50rpx;
 }

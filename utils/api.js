@@ -1,4 +1,11 @@
+function apiErrorFn(status, error) {
+  console.log(error)
+}
+
 function request(path, method, params, successFn, failFn) {
+    if (!failFn) {
+       failFn = apiErrorFn
+    }
     var baseUrl = 'https://api.quzhiboapp.com/'
     var data = {}
     if (params) {
@@ -25,8 +32,8 @@ function request(path, method, params, successFn, failFn) {
     })
 }
 
-function get(path, successFn, failFn) {
-  request(path, 'GET', null, successFn, failFn)
+function get(path, params, successFn, failFn) {
+  request(path, 'GET', params, successFn, failFn)
 }
 
 function post(path, params, successFn, failFn) {
