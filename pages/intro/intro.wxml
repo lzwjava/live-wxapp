@@ -1,3 +1,5 @@
+<import src="../../lib/wemark/wemark.wxml"/>
+
 <view class="intro-view">
 
   <view class="cover-section">
@@ -47,15 +49,26 @@
 
   </view>
 
-  <div class="speaker-section card-group" wx:if="live.speakerIntro">
+  <view class="speaker-section card-group" wx:if="live.speakerIntro">
 
-    <div class="title-label">
+    <view class="title-label">
       主播简介
-    </div>
+    </view>
 
-    <import src="../../lib/wemark/wemark.wxml"/>
+    <template is="wemark" data="{{...wemark}}"></template>
 
-  </div>
+  </view>
+
+  <view class="detail-section card-group">
+
+    <view class="title-label">
+      直播详情
+    </view>
+
+    <template is="wemark" data="{{...wemarkDetail}}"></template>
+
+  </view>
+
 
   <view class="attend-section">
 

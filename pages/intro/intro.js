@@ -1,13 +1,15 @@
 var util = require('../../utils/util')
 var api = require('../../utils/api')
-var wemark = require('wemark')
+var wemark = require('../../lib/wemark/wemark')
 
 Page({
   data: {
     liveId: 0,
     live: {},
     attendedUsers: [],
-    btnTitle: ''
+    btnTitle: '',
+    wemark: {},
+    wemarkDetail: {}
   },
   onLoad: function (query) {
     this.setData({
@@ -19,6 +21,17 @@ Page({
            live: data,
            btnTitle: this.btnTitle(data)
          })
+
+         wemark.parse(data.speakerIntro, this, {
+           imageWidth: wx.getSystemInfoSync().windowWidth - 40,
+           name: 'wemark'
+         })
+
+         wemark.parse(data.detail, this, {
+           imageWidth: wx.getSystemInfoSync().windowWidth - 40,
+           name: 'wemarkDetail'
+         })
+
        })
     api.get('lives/' + this.data.liveId + '/users', {
       limit: 7
@@ -29,7 +42,7 @@ Page({
       })
     })
   },
-  thankWord() {
+  onReady() {
   },
   btnTitle(live) {
     var statusWord;
