@@ -1,3 +1,5 @@
+@import '../../lib/wemark/wemark.wxss'
+
 .intro-view {
   background-color: #e7e7e7;
 }

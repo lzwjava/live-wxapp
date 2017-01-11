@@ -1,5 +1,6 @@
 var util = require('../../utils/util')
 var api = require('../../utils/api')
+var wemark = require('wemark')
 
 Page({
   data: {

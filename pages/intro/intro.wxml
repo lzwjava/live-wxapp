@@ -47,6 +47,16 @@
 
   </view>
 
+  <div class="speaker-section card-group" wx:if="live.speakerIntro">
+
+    <div class="title-label">
+      主播简介
+    </div>
+
+    <import src="../../lib/wemark/wemark.wxml"/>
+
+  </div>
+
   <view class="attend-section">
 
      <view class="attend-btn" bindtap="attendLive">{{btnTitle}}</view>
