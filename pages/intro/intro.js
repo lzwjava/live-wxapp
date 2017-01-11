@@ -29,7 +29,6 @@ Page({
     })
   },
   thankWord() {
-
   },
   btnTitle(live) {
     var statusWord;
@@ -51,10 +50,9 @@ Page({
         var amountWord;
         if (live.realAmount != live.amount) {
           amountWord = '¥' + (live.realAmount / 100.0)  +
-          '  <span class="origin">' +'¥' + (live.amount / 100.0)+ '</span>'
+          ' 原价 ¥' + (live.amount / 100.0)
         } else {
-          amountWord = '¥' + (live.amount / 100.0)  +
-          '<span class="share-tips">' + '（分享朋友圈' + thankWord + ' ）' + '<span>'
+          amountWord = '¥' + (live.amount / 100.0)  + '（分享朋友圈' + thankWord + ' ）'
         }
         return '赞助并' + statusWord + amountWord
       } else {

@@ -32,6 +32,7 @@
   </view>
 
   <view class="attend-summary-section card-group">
+
     <view class="attend-info">
       <ul class="attended-users">
         <li class="avatar-cell" wx:for-item="u" wx:for="{{attendedUsers}}">
