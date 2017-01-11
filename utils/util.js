@@ -49,10 +49,26 @@ function toast(content) {
   }, 2000)
 }
 
+function showError(content) {
+  if (!content) {
+    content = '未知错误'
+  }
+  wx.showModal({
+    title: '出错啦~',
+    content: content,
+    success: function(res) {
+      if (res.confirm) {
+        console.log('用户点击确定')
+      }
+    }
+  })
+}
+
 module.exports = {
   formatTime: formatTime,
   timeGap: timeGap,
   loading: loading,
   loaded: loaded,
-  toast: toast
+  toast: toast,
+  showError: showError
 }

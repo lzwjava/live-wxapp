@@ -1,8 +1,15 @@
 function apiErrorFn(status, error) {
   wx.hideToast()
+  var content = error
+  if (!content) {
+    content = status
+  }
+  if (!content) {
+    content = '未知错误'
+  }
   wx.showModal({
     title: '出错了',
-    content: error,
+    content: content,
     success: function(res) {
       if (res.confirm) {
         console.log('用户点击确定')
@@ -20,19 +27,23 @@ function request(path, method, params, successFn, failFn) {
     if (params) {
       data = params
     }
+    console.log(path)
     wx.request({
       url: baseUrl + path,
       data: data,
       method: method,
       success: (res) => {
         var resp = res.data
+        console.log(res)
         if (resp.status == 'success') {
           successFn(resp.result)
         } else {
+          console.log('status error')
           failFn(resp.status, resp.error)
         }
       },
       fail: () => {
+        console.log('request fail')
         failFn('network_error', res.error)
       },
       complete: () => {

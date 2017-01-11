@@ -21,12 +21,12 @@ Page({
     })
   },
   onLoad () {
-    var that = this
-    app.getUserInfo((userInfo) => {
-      that.setData({
-        userInfo:userInfo
-      })
-    })
+    // app.getUserInfo((userInfo) => {
+    //   this.setData({
+    //     userInfo:userInfo
+    //   })
+    // })
+
     api.get('lives/on', null,  (data) => {
       data.forEach(live =>
         live.timeGap = util.timeGap(live.planTs)
