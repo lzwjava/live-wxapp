@@ -1,5 +1,14 @@
 function apiErrorFn(status, error) {
-  console.log(error)
+  wx.hideToast()
+  wx.showModal({
+    title: '出错了',
+    content: error,
+    success: function(res) {
+      if (res.confirm) {
+        console.log('用户点击确定')
+      }
+    }
+  })
 }
 
 function request(path, method, params, successFn, failFn) {

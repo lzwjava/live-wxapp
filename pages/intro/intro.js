@@ -15,8 +15,23 @@ Page({
     this.setData({
      liveId:query.liveId
     })
-    api.get('lives/' + query.liveId, null,
+
+    this.loadLive()
+
+    api.get('lives/' + this.data.liveId + '/users', {
+      limit: 7
+    }, (data) => {
+      this.setData({
+        attendedUsers: data
+      })
+    })
+  },
+  loadLive() {
+    util.loading()
+    api.get('lives/' + this.data.liveId, null,
        (data) => {
+         util.loaded()
+
          this.setData({
            live: data,
            btnTitle: this.btnTitle(data)
@@ -31,18 +46,12 @@ Page({
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
            name: 'wemarkDetail'
          })
-
-       })
-    api.get('lives/' + this.data.liveId + '/users', {
-      limit: 7
-    }, (data) => {
-      console.log('users')
-      this.setData({
-        attendedUsers: data
       })
-    })
   },
   onReady() {
+  },
+  attendLive() {
+    this.payOrCreateAttend()
   },
   btnTitle(live) {
     var statusWord;
@@ -73,5 +82,52 @@ Page({
         return '报名' + statusWord
       }
     }
+  },
+  goLive() {
+    wx.navigateTo({
+      url: '../live/live?liveId=' + this.data.liveId
+    })
+  },
+  payOrCreateAttend() {
+    if (this.data.live.needPay) {
+      this.pay()
+    } else {
+      this.createAttend()
+    }
+  },
+  pay() {
+    util.loading()
+    return api.post('attendances/create', {
+      liveId: this.data.liveId,
+      channel: 'wechat'
+    }, (data) => {
+      util.loaded()
+
+      wx.requestPayment({
+        timestamp: data.timeStamp,
+        nonceStr: data.nonceStr,
+        package: data.package,
+        paySign: data.paySign,
+        signType: data.signType,
+        success: (res) => {
+          util.toast('支付成功')
+        },
+        fail: (res) => {
+          util.toast('支付失败')
+          console.log(res)
+        }
+      })
+
+    })
+  },
+  createAttend() {
+    util.loading()
+    api.post('attendances/create', {
+      liveId: this.liveId
+    }, (data) => {
+      util.loaded()
+      util.show('报名成功')
+      this.goLive()
+    })
   }
 })

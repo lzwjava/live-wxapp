@@ -27,7 +27,32 @@ function timeGap(ts) {
   return text
 }
 
+function loading() {
+  wx.showToast({
+    title: '加载中',
+    icon: 'loading',
+    duration: 0
+  })
+}
+
+function loaded() {
+   wx.hideToast()
+}
+
+function toast(content) {
+  wx.showToast({
+    title: content,
+    icon: 'success',
+  })
+  setTimeout(function(){
+    wx.hideToast()
+  }, 2000)
+}
+
 module.exports = {
   formatTime: formatTime,
-  timeGap: timeGap
+  timeGap: timeGap,
+  loading: loading,
+  loaded: loaded,
+  toast: toast
 }
