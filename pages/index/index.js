@@ -20,12 +20,8 @@ Page({
       url: '../intro/intro?liveId=' + liveId
     })
   },
-  onLoad () {
-    // app.getUserInfo((userInfo) => {
-    //   this.setData({
-    //     userInfo:userInfo
-    //   })
-    // })
+  onLoad () {    
+    app.fetchCurrentUser()
 
     api.get('lives/on', null,  (data) => {
       data.forEach(live =>

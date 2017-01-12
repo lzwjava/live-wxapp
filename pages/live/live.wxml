@@ -1,5 +1,35 @@
+<import src="../../lib/wemark/wemark.wxml"/>
+
 <view class="live-view">
 
-  <video src="http://live-cdn.quzhiboapp.com/live/abc.m3u8" controls></video>
+  <view class="player-area">
+
+    <view class="video-wait video-common" wx:if="{{live.status == 10}}">
+      <view class="big-title">离直播开始还有{{timeDuration}}</view>
+      <view class="small-title">开播时您将收到一条微信通知~</view>
+      <view class="small-title">可打开 quzhiboapp.com 在电脑上观看</view>
+      <view class="small-title">另可长按加微信进入用户群和主播聊聊</view>
+      <image class="qrcode" src="../../img/qrcode_me_3.jpg" alt="" mode="widthFix"></image>
+    </view>
+
+    <view class="video-on" wx:if="{{live.status == 20 || live.status == 25 || live.status == 30}}">
+      <video src="{{videoSrc}}" controls></video>
+
+      <view class="video-poster-cover" wx:if="{{playStatus != 2}}">
+        <image class="cover-image" src="{{live.coverUrl}}" mode="scaleToFill"></image>
+        <view class="video-center">
+          <image class="loading-img" wx:if="{{playStatus == 1}}" src="../../img/video-circle.png"></image>
+
+          <view class="canplay" wx:if="{{playStatus == 0}}" bindtap="canPlayClick"></view>
+
+        </view>
+      </view>
+    </view>
+
+    <view class="video-error video-common" wx:if="{{live.status == 35}}">
+      <view class="big-title">直播发生了些小故障<br></br>请到公告栏查看</view>
+    </view>
+
+  </view>
 
 </view>

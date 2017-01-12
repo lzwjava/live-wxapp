@@ -19,6 +19,14 @@ App({
     this.login(cb)
   },
   fetchCurrentUser() {
+    wx.checkSession({
+      success: function(){
+        console.log('登录态未过期')
+      fail: function(){
+        console.log('登录态已过期')
+      }
+    })
+
     api.get('self', null, (user) => {
       this.globalData.currentUser = user
     }, (status, error) => {
@@ -82,7 +90,7 @@ App({
        })
      },
      fail: () => {
-       util.showError('微信登录失败')
+       util.showError('微信登录')
      }
     })
   },

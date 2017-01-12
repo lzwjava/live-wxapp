@@ -51,7 +51,10 @@ Page({
   onReady() {
   },
   attendLive() {
-    this.payOrCreateAttend()
+    wx.navigateTo({
+      url: '../live/live?liveId=' + this.data.liveId
+    })
+    // this.payOrCreateAttend()
   },
   btnTitle(live) {
     var statusWord;

@@ -1,6 +1,7 @@
 <template name="wemark">
 
 <view class="wemark_wrapper">
+
 <block wx:for="{{renderList}}" wx:key="blockIndex" wx:for-index="blockIndex" wx:for-item="renderBlock">
 	<view class="wemark_block_{{renderBlock.type}}">
 		<block wx:if="{{renderBlock.content.push}}" wx:for="{{renderBlock.content}}" wx:key="inlineIndex" wx:for-index="inlineIndex" wx:for-item="renderInline">
