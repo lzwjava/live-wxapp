@@ -22,6 +22,7 @@ App({
     wx.checkSession({
       success: function(){
         console.log('登录态未过期')
+      },
       fail: function(){
         console.log('登录态已过期')
       }
