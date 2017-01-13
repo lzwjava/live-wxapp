@@ -1,6 +1,38 @@
 var util = require('../../utils/util')
 var api = require('../../utils/api')
 var wemark = require('../../lib/wemark/wemark')
+var lcChat = require('../../lib/realtime.weapp.min.js')
+var inherit = require('../../lib/inherit')
+
+var Realtime = lcChat.Realtime
+var TextMessage = lcChat.TextMessage
+var messageType = lcChat.messageType
+var TypedMessage = lcChat.TypedMessage
+
+export const WxAudioMessage = inherit(TypedMessage)
+var WxAudioType = 1
+messageType(WxAudioType)(WxAudioMessage)
+
+export const SystemMessage = inherit(TypedMessage)
+var SystemMessageType = 2
+messageType(SystemMessageType)(SystemMessage)
+
+export const RewardMessage = inherit(TypedMessage)
+var RewardMessageType = 3
+messageType(RewardMessageType)(RewardMessage)
+
+
+var prodAppId = 's83aTX5nigX1KYu9fjaBTxIa-gzGzoHsz'
+
+var realtime = new Realtime({
+  appId: prodAppId,
+  region: 'cn',
+  noBinary: true
+})
+
+realtime.register(WxAudioMessage)
+realtime.register(SystemMessage)
+realtime.register(RewardMessage)
 
 Page({
   data: {
@@ -12,7 +44,8 @@ Page({
     videos: [],
     videoContext: {},
     changeTitle: '',
-    currentTab: 0
+    currentTab: 0,
+    msgs: []
   },
   onLoad: function (query) {
     this.setData({
@@ -41,7 +74,7 @@ Page({
       return '切换视频线路'
     }
   },
-  loadLive() {
+  loadLive(cb) {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
        (live) => {
@@ -56,6 +89,7 @@ Page({
                   videoSrc: this.videoSrc(),
                   changeTitle: this.changeTitle()
                 })
+                cb && cb()
          })
       })
   },
@@ -81,6 +115,8 @@ Page({
     })
   },
   changeLiveUrl() {
-    this.loadLive()
+    this.loadLive(() => {
+      this.canPlayClick()
+    })
   }
 })

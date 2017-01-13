@@ -13,7 +13,7 @@
     </view>
 
     <view class="video-on" wx:if="{{live.status == 20 || live.status == 25 || live.status == 30}}">
-      <video id="myVideo" src="{{videoSrc}}" controls></video>
+      <video id="myVideo" src="{{videoSrc}}" controls objectFit="cover"></video>
 
       <view class="video-poster-cover" wx:if="{{playStatus != 2}}">
 
@@ -46,6 +46,64 @@
     <view class="live-tab tab-item" bindtap="changeLiveUrl">
       {{changeTitle}}
     </view>
+  </view>
+
+  <view class="chat-area tab-sub-area"
+       wx:if="currentTab == 0">
+
+    <ul class="msg-list">
+
+      <li class="msg" wx:for-item="msg" wx:for="{{msgs}}">
+
+        <view class="system-msg" wx:if="{{msg.type == 2 && live.status != 30}}">
+          <view class="content">{{msg.text}}</view>
+        </view>
+
+        <view class="bubble-msg" wx:if="{{msg.type !=2}}">
+
+          <text class="name">{{msg.attributes.username}}</text>
+
+          <view class="content">
+            <view class="bubble">
+              <view class="text-content bubble-cont" wx:if="{{msg.type == -1}}">
+                <view class="plain">
+                  <text class="text">{{msg.text}}</text>
+                </view>
+              </view>
+              <view class="text-content bubble-cont" wx:if="{{msg.type == 3}}">
+                <view class="plain">
+                  <text class="text reward-text">{{msg.text}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </li>
+
+    </ul>
+
+    <view class="send-area">
+
+      <!-- <a class="packet-btn" bindtap="showRewardForm"></a> -->
+
+      <view class="input-ways">
+
+        <view class="text-input">
+
+          <input type="text" value="inputMsg"></input>
+          <button type="button" class="btn btn-gray" bindtap="sendMsg">发送</button>
+
+        </view>
+
+      </view>
+
+    </view>
+
+  </view>
+
+  <view class="notice-area tab-sub-area" v-show="currentTab == 1">
+
   </view>
 
 

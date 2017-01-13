@@ -2,7 +2,7 @@
 
 .player-area {
 	width: 100%;
-  height: 469rpx;
+  height: 470rpx;
 	position: relative;
 	background-color: #383838;
 }
@@ -10,19 +10,19 @@
 .player-area .big-title {
 	text-align: center;
 	color: #fff;
-	font-size: 18px;
+	font-size: 36rpx;
 }
 
 .player-area .middle-title {
 	text-align: center;
 	color: #fff;
-	font-size: 14px;
+	font-size: 28rpx;
 }
 
 .player-area .small-title {
 	text-align: center;
 	color: #bebebe;
-	font-size: 14px;
+	font-size: 28rpx;
 }
 
 .player-area .video-common {
@@ -35,8 +35,8 @@
 }
 
 .player-area .video-wait .qrcode {
-	width: 80px;
-	margin-top: 5px;
+	width: 160rpx;
+	margin-top: 10rpx;
 }
 
 .player-area .video-on video {
@@ -51,6 +51,7 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
+  z-index: 10;
 }
 
 .video-poster-cover .cover-image {
@@ -59,12 +60,12 @@
 
 .video-poster-cover .video-center {
 	position: absolute;
-	width: 70px;
-	height: 70px;
+	width: 140rpx;
+	height: 140rpx;
 	left: 50%;
 	top: 50%;
-	margin-left: -35px;
-	margin-top: -35px;
+	margin-left: -70rpx;
+	margin-top: -70rpx;
 }
 
 .video-poster-cover .video-center .loading-img {
@@ -79,6 +80,8 @@
 	background: url("../../img/video-play.png") center no-repeat;
 	background-size: 100% 100%;
 }
+
+/*tab-area*/
 
 .tab-area {
 	display: flex;
@@ -97,4 +100,188 @@
 .tab-area .tab-item.active {
 	color: #00BDEF;
 	border-bottom: 1px solid #00BDEF;
+}
+
+.tab-sub-area {
+	padding: 10rpx;
+	box-sizing: border-box;
+	width: 100%;
+	position: absolute;
+  top: 540rpx;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: all 0.5s ease;
+}
+
+.chat-area .msg-list {
+	position: absolute;
+	overflow: hidden;
+	overflow-y: scroll;
+	left: 10rpx;
+	right: 10rpx;
+	top: 10rpx;
+	bottom: 90rpx;
+}
+
+/*system-msg*/
+.system-msg {
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+.system-msg .content {
+	border-radius: 3px;
+	background-color: #dcdcdc;
+	font-size: 24rpx;
+	padding: 2rpx 16rpx;
+	color: #fff;
+	display: inline-block;
+}
+
+/*bubble-msg*/
+
+.bubble-msg {
+	margin-bottom: 10rpx;
+}
+
+.bubble-msg .name {
+	color: #868686;
+	float: left;
+}
+
+.bubble-msg .content {
+	overflow: hidden;
+}
+
+.bubble-msg .content .bubble {
+	max-width: 85%;
+	min-height: 28rpx;
+	margin: 0 20rpx;
+	border-radius: 6rpx;
+	vertical-align: top;
+	background-color: #fff;
+	display: inline-block;
+	position: relative;
+}
+
+.bubble-msg .content .bubble:before,
+.bubble-msg .content .bubble:after {
+	border: 5px solid transparent;
+	content: " ";
+	position: absolute;
+	top: 16rpx;
+	right: 100%;
+}
+
+.bubble-msg .content .bubble:after {
+	border-right-color: #fff;
+	border-right-width: 5px;
+}
+
+.bubble-msg .content .bubble .bubble-cont {
+	word-wrap: break-word;
+	word-break: break-all;
+	min-height: 50rpx;
+}
+
+.bubble-msg .content .bubble .audio-content .voice {
+	width: 80rpx;
+	padding: 0px 0px;
+}
+
+.bubble-msg .content .bubble .audio-content .voice .voice-gray {
+	background: url("../../img/sprite.png") 0 -2427px;
+	width: 46px;
+	height: 46px;
+	display: inline-block;
+	vertical-align: middle;
+	background-size: 150px 2489px;
+}
+
+.bubble-msg .content .bubble .text-content .plain {
+	padding: 6rpx 10rpx;
+	font-size: 28px;
+}
+
+.bubble-msg .content .bubble .text-content .plain pre {
+	word-wrap: break-word;
+	word-break: normal;
+	white-space: pre-wrap;
+}
+
+.bubble-msg .content .bubble .text-content .plain .reward-text {
+	color: #d65239;
+}
+
+/*send-area*/
+
+.send-area {
+	position: absolute;
+	left: 10rpx;
+	right: 10rpx;
+	height: 80rpx;
+	bottom: 0rpx;
+	box-sizing: border-box;
+	padding-top: 6rpx;
+	padding-bottom: 6rpx;
+}
+
+.send-area .toggle-btn {
+	width: 68rpx;
+	height: 68rpx;
+	display: inline-block;
+}
+
+.send-area .toggle-btn.text-btn {
+	background: url("../../img/keyboard.png");
+	background-size: contain;
+}
+
+.send-area .packet-btn {
+	width: 60rpx;
+	height: 60rpx;
+	display: inline-block;
+	background: url("../../img/packet-btn.png");
+	background-size: contain;
+}
+
+.send-area .input-ways {
+	position: absolute;
+	left: 80rpx;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 32rpx;
+}
+
+.send-area .input-ways .btn-gray {
+	border: 1px solid #cbccd0;
+	background-color: #f2f2f5;
+}
+
+.send-area .input-ways .btn-gray:active {
+	background-color: #babbbe;
+}
+
+.send-area .input-ways .text-input {
+	width: 100%;
+	height: 68rpx;
+	line-height: 68rpx;
+}
+
+.send-area .input-ways .text-input input {
+	width: 75%;
+	height: 60rpx;
+	padding-left: 20rpx;
+	padding-right: 20rpx;
+	font-size: 32rpx;
+	vertical-align: middle;
+	border-radius: 5px;
+}
+
+.send-area .input-ways .text-input button {
+	width: 20%;
+	vertical-align: middle;
+	padding: 14rpx 10rpx;
 }
