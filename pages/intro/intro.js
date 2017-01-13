@@ -51,10 +51,13 @@ Page({
   onReady() {
   },
   attendLive() {
-    wx.navigateTo({
-      url: '../live/live?liveId=' + this.data.liveId
-    })
-    // this.payOrCreateAttend()
+    if (this.data.live.canJoin) {
+      wx.navigateTo({
+        url: '../live/live?liveId=' + this.data.liveId
+      })
+    } else {
+      this.payOrCreateAttend()
+    }
   },
   btnTitle(live) {
     var statusWord;
@@ -126,7 +129,7 @@ Page({
   createAttend() {
     util.loading()
     api.post('attendances/create', {
-      liveId: this.liveId
+      liveId: this.data.liveId
     }, (data) => {
       util.loaded()
       util.show('报名成功')

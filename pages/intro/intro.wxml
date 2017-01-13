@@ -23,7 +23,6 @@
         <view class="status">
             {{statusText}}
         </view>
-
       </view>
 
       <view class="time-label">直播时间</view>

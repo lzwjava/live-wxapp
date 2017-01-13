@@ -79,3 +79,22 @@
 	background: url("../../img/video-play.png") center no-repeat;
 	background-size: 100% 100%;
 }
+
+.tab-area {
+	display: flex;
+	height: 70rpx;
+}
+
+.tab-area .tab-item {
+	flex-grow: 1;
+	background-color: #f5f5f5;
+	text-align: center;
+	line-height: 70rpx;
+	transition: all 0.5s ease;
+	color: #828282;
+}
+
+.tab-area .tab-item.active {
+	color: #00BDEF;
+	border-bottom: 1px solid #00BDEF;
+}

@@ -10,7 +10,9 @@ Page({
     videoSelected: 0,
     videoSrc: '',
     videos: [],
-    videoContext: {}
+    videoContext: {},
+    changeTitle: '',
+    currentTab: 0
   },
   onLoad: function (query) {
     this.setData({
@@ -31,6 +33,14 @@ Page({
     }
     return live.hlsUrl
   },
+  changeTitle() {
+    var live = this.data.live
+    if (live.status < 30) {
+      return '切换直播线路'
+    } else {
+      return '切换视频线路'
+    }
+  },
   loadLive() {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
@@ -43,7 +53,8 @@ Page({
                   videos: videos
                 })
                 this.setData({
-                  videoSrc: this.videoSrc()
+                  videoSrc: this.videoSrc(),
+                  changeTitle: this.changeTitle()
                 })
          })
       })
@@ -58,5 +69,18 @@ Page({
         playStatus: 2
       })
     }, 1000)
+  },
+  showChatTab() {
+    this.setData({
+      currentTab: 0
+    })
+  },
+  showNoticeTab() {
+    this.setData({
+      currentTab: 1
+    })
+  },
+  changeLiveUrl() {
+    this.loadLive()
   }
 })
