@@ -39,7 +39,11 @@
 	margin-top: 5px;
 }
 
-.player-area .video-on .video-poster-cover {
+.player-area .video-on video {
+  width: 100%;
+}
+
+.video-poster-cover {
 	text-align: center;
 	background: rgba(0,0,0,0.5);
   position: absolute;
@@ -49,11 +53,11 @@
 	right: 0;
 }
 
-.player-area .video-on .video-poster-cover .cover-image {
+.video-poster-cover .cover-image {
   width: 100%;
 }
 
-.player-area .video-on .video-poster-cover .video-center {
+.video-poster-cover .video-center {
 	position: absolute;
 	width: 70px;
 	height: 70px;
@@ -63,13 +67,13 @@
 	margin-top: -35px;
 }
 
-.player-area .video-on .video-poster-cover .video-center .loading-img {
+.video-poster-cover .video-center .loading-img {
 	width: 100%;
 	height: 100%;
 	animation: circle 1s cubic-bezier(0, 0, 0.76, 0.77) infinite;
 }
 
-.player-area .video-on .video-poster-cover .video-center .canplay {
+.video-poster-cover .video-center .canplay {
 	width: 100%;
 	height: 100%;
 	background: url("../../img/video-play.png") center no-repeat;

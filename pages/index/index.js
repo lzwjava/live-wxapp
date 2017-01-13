@@ -20,15 +20,15 @@ Page({
       url: '../intro/intro?liveId=' + liveId
     })
   },
-  onLoad () {    
-    app.fetchCurrentUser()
-
-    api.get('lives/on', null,  (data) => {
-      data.forEach(live =>
-        live.timeGap = util.timeGap(live.planTs)
-      )
-      this.setData({
-        lives: data
+  onLoad () {
+    app.fetchCurrentUser(() => {
+      api.get('lives/on', null,  (data) => {
+        data.forEach(live =>
+          live.timeGap = util.timeGap(live.planTs)
+        )
+        this.setData({
+          lives: data
+        })
       })
     })
   }

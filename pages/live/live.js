@@ -9,7 +9,8 @@ Page({
     playStatus: 0,
     videoSelected: 0,
     videoSrc: '',
-    videos: []
+    videos: [],
+    videoContext: {}
   },
   onLoad: function (query) {
     this.setData({
@@ -18,13 +19,15 @@ Page({
     this.loadLive()
   },
   onReady () {
+    this.videoContext =  wx.createVideoContext('myVideo')
   },
   videoSrc() {
-    var live = this.data.live;
+    var live = this.data.live
+    var videos = this.data.videos
     if (live.status == 20) {
       return live.hlsUrl
     } else if (live.status == 30) {
-      return this.videos[this.data.videoSelected].url
+      return videos[this.data.videoSelected].url
     }
     return live.hlsUrl
   },
@@ -32,22 +35,28 @@ Page({
     util.loading()
     api.get('lives/' + this.data.liveId, null,
        (live) => {
-
          api.get('lives/' + this.data.liveId + '/videos',
               null, (videos) => {
                 util.loaded()
-
                 this.setData({
                   live: live,
                   videos: videos
                 })
-
                 this.setData({
                   videoSrc: this.videoSrc()
                 })
-
          })
-         
       })
+  },
+  canPlayClick() {
+    this.setData({
+      playStatus: 1
+    })
+    this.videoContext.play()
+    setTimeout(() => {
+      this.setData({
+        playStatus: 2
+      })
+    }, 1000)
   }
 })

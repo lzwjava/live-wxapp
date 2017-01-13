@@ -9,57 +9,28 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
-  getUserInfo (cb) {
-    // if(this.globalData.userInfo != null){
-    //   typeof cb == "function" && cb(this.globalData.userInfo)
-    // }else{
-    //   //调用登录接口
-    //   this.login(cb)
-    // }
-    this.login(cb)
-  },
-  fetchCurrentUser() {
-    wx.checkSession({
-      success: function(){
-        console.log('登录态未过期')
-      },
-      fail: function(){
-        console.log('登录态已过期')
-      }
-    })
+  fetchCurrentUser(cb) {
+    wx.removeStorageSync('currentUser')
+
+    var currentUser = wx.getStorageSync('currentUser')
+    this.globalData.currentUser = currentUser
 
     api.get('self', null, (user) => {
-      this.globalData.currentUser = user
+      this.updateUser(user)
+      cb && cb(user)
     }, (status, error) => {
       if (status == 'not_in_session') {
-        this.loginBySession()
+        this.login(cb)
       } else {
         util.showError(error)
       }
     })
   },
-  loginBySession() {
-    var thirdSession =  wx.getStorageSync('thirdSession') || ''
-    console.log('thirdSession: ' + thirdSession)
-    if (thirdSession != '') {
-      api.post('wechat/loginBySession', {
-        'thirdSession': thirdSession
-      }, (user) => {
-        this.globalData.currentUser = user
-      }, (status, error) => {
-        if (status == 'wx_session_expire') {
-          util.toast('登录已过期，请重新登录')
-          this.login()
-        } else {
-          util.showError(error)
-        }
-      })
-    } else {
-      this.login()
-    }
+  updateUser(user) {
+    wx.setStorageSync('currentUser', user)
+    this.globalData.currentUser = user
   },
   login(cb) {
-    console.log ('wxlogin')
     wx.login({
       success: (res) => {
         api.post('wechat/login', {
@@ -67,8 +38,10 @@ App({
         }, (data) => {
           wx.getUserInfo({
             success: (res) => {
+              console.log('userInfo')
+              console.log(res)
               var thirdSession = data.thirdSession
-
+              console.log(thirdSession)
               api.post('wechat/registerbyApp', {
                 'rawData': res.rawData,
                 'signature': res.signature,
@@ -76,12 +49,8 @@ App({
                 'encryptedData': res.encryptedData,
                 'thirdSession': thirdSession
               }, (user) => {
-
-                wx.setStorageSync('thirdSession', thirdSession)
-
-                console.log('currentUser')
-                console.log(data)
-                this.globalData.currentUser = user
+                this.updateUser(user)
+                cb && cb(user)
               })
             },
             fail: (error) => {
@@ -91,7 +60,7 @@ App({
        })
      },
      fail: () => {
-       util.showError('微信登录')
+       util.showError('微信登录失败')
      }
     })
   },

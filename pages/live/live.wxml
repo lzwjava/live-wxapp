@@ -13,16 +13,20 @@
     </view>
 
     <view class="video-on" wx:if="{{live.status == 20 || live.status == 25 || live.status == 30}}">
-      <video src="{{videoSrc}}" controls></video>
+      <video id="myVideo" src="{{videoSrc}}" controls></video>
 
       <view class="video-poster-cover" wx:if="{{playStatus != 2}}">
+
         <image class="cover-image" src="{{live.coverUrl}}" mode="scaleToFill"></image>
+
         <view class="video-center">
+
           <image class="loading-img" wx:if="{{playStatus == 1}}" src="../../img/video-circle.png"></image>
 
           <view class="canplay" wx:if="{{playStatus == 0}}" bindtap="canPlayClick"></view>
 
         </view>
+
       </view>
     </view>
 

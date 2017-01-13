@@ -27,14 +27,23 @@ function request(path, method, params, successFn, failFn) {
     if (params) {
       data = params
     }
+    var header = {}
+
+    var app = getApp()
+    if (app.globalData.currentUser) {
+      header['X-Session'] = app.globalData.currentUser.sessionToken
+    }
+
     console.log(path)
+
     wx.request({
       url: baseUrl + path,
       data: data,
+      header: header,
       method: method,
       success: (res) => {
         var resp = res.data
-        console.log(res)
+        console.log(resp)
         if (resp.status == 'success') {
           successFn(resp.result)
         } else {
