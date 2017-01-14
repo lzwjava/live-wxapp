@@ -46,9 +46,11 @@ Page({
     currentTab: 0,
     msgs: [],
     inputMsg: '',
-    client: {},
-    curUser: {}
+    curUser: {},
   },
+  messageIterator:{},
+  client: {},
+  conv: {},
   onLoad (query) {
     this.setData({
      liveId: query.liveId
@@ -144,22 +146,58 @@ Page({
     return msg
   },
   addMsg(msg) {
-    var cMsg = this.convertMsg(msg)
-    this.data.msgs.push(cMsg)
-    console.log(this.data.msgs)
+    var msgs = []
+    msgs.push(msg)
+    this.addMsgs(msgs)
+  },
+  addMsgs(msgs) {
+    var cMsgs = []
+    msgs.forEach((msg) => {
+      var cMsg = this.convertMsg(msg)
+      cMsgs.push(cMsg)
+    })
+    var newMsgs = this.data.msgs.concat(cMsgs)
     this.setData({
-      msgs: this.data.msgs
+      msgs: newMsgs
     })
   },
   openClient() {
     this.addSystemMsg('正在连接聊天服务器...')
     realtime.createIMClient(this.data.curUser.userId + '')
       .then((client) => {
+
         this.client = client
+
         this.addSystemMsg('聊天服务器连接成功')
         // this.registerEvent()
-        // this.fetchConv()
+        this.fetchConv()
       }).catch(this.handleError)
+  },
+  fetchConv() {
+    this.client.getConversation(this.data.live.conversationId)
+    .then((conv) => {
+      if (conv == null) {
+        this.handleError('获取对话失败');
+        return
+      }
+      this.conv = conv
+      this.addSystemMsg('正在加载聊天记录...')
+      var messageIterator = this.conv.createMessagesIterator({ limit: 100 })
+      this.messageIterator =  messageIterator
+      return this.messageIterator.next()
+    }).then((result)=> {
+
+      if (result.done) {
+      }
+      this.addMsgs(result.value)
+
+      return this.conv.join()
+    }).then((conv) => {
+
+      // this.scrollToBottom()
+      //
+      // this.initScroll()
+    }).catch(this.handleError)
   },
   handleError(error) {
     if (typeof error != 'string') {
