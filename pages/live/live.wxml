@@ -51,37 +51,38 @@
   <view class="chat-area tab-sub-area"
        wx:if="{{currentTab == 0}}">
 
-    <ul class="msg-list">
+       <scroll-view class="msg-list" scroll-y="true" bindscrolltoupper="upper"
+         bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
 
-      <li class="msg" wx:for-item="msg" wx:for="{{msgs}}">
+         <view class="msg" wx:for-item="msg" wx:for="{{msgs}}" id="{{msg.id}}">
 
-        <view class="system-msg" wx:if="{{msg.type == 2 && live.status != 30}}">
-          <view class="content">{{msg.text}}</view>
-        </view>
+           <view class="system-msg" wx:if="{{msg.type == 2 && live.status != 30}}">
+             <view class="content">{{msg.text}}</view>
+           </view>
 
-        <view class="bubble-msg" wx:if="{{msg.type !=2}}">
+           <view class="bubble-msg" wx:if="{{msg.type !=2}}">
 
-          <text class="name">{{msg.attributes.username}}</text>
+             <text class="name">{{msg.attributes.username}}</text>
 
-          <view class="content">
-            <view class="bubble">
-              <view class="text-content bubble-cont" wx:if="{{msg.type == -1}}">
-                <view class="plain">
-                  <text class="text">{{msg.text}}</text>
-                </view>
-              </view>
-              <view class="text-content bubble-cont" wx:if="{{msg.type == 3}}">
-                <view class="plain">
-                  <text class="text reward-text">{{msg.text}}</text>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
+             <view class="content">
+               <view class="bubble">
+                 <view class="text-content bubble-cont" wx:if="{{msg.type == -1}}">
+                   <view class="plain">
+                     <text class="text">{{msg.text}}</text>
+                   </view>
+                 </view>
+                 <view class="text-content bubble-cont" wx:if="{{msg.type == 3}}">
+                   <view class="plain">
+                     <text class="text reward-text">{{msg.text}}</text>
+                   </view>
+                 </view>
+               </view>
+             </view>
+           </view>
 
-      </li>
+         </view>
 
-    </ul>
+       </scroll-view>
 
     <view class="send-area">
 

@@ -47,6 +47,7 @@ Page({
     msgs: [],
     inputMsg: '',
     curUser: {},
+    toView: ''
   },
   messageIterator:{},
   client: {},
@@ -139,6 +140,7 @@ Page({
   },
   convertMsg(lcMsg) {
     var msg = {}
+    msg.id = lcMsg.id
     msg.type = lcMsg.type
     msg.attributes = {}
     msg.attributes.username = lcMsg.attributes.username
@@ -150,13 +152,18 @@ Page({
     msgs.push(msg)
     this.addMsgs(msgs)
   },
-  addMsgs(msgs) {
+  addMsgs(msgs, insertBefore) {
     var cMsgs = []
     msgs.forEach((msg) => {
       var cMsg = this.convertMsg(msg)
       cMsgs.push(cMsg)
     })
-    var newMsgs = this.data.msgs.concat(cMsgs)
+    var newMsgs
+    if (insertBefore) {
+      newMsgs = cMsgs.concat(this.data.msgs)
+    } else {
+      newMsgs = this.data.msgs.concat(cMsgs)
+    }
     this.setData({
       msgs: newMsgs
     })
@@ -194,15 +201,51 @@ Page({
       return this.conv.join()
     }).then((conv) => {
 
-      // this.scrollToBottom()
-      //
-      // this.initScroll()
+      this.scrollToBottom()
+
     }).catch(this.handleError)
+  },
+  scrollToBottom() {
+    if (this.data.msgs.length > 0) {
+      var lastMsgId = this.data.msgs[this.data.msgs.length - 1].id
+      this.setData({
+        toView: lastMsgId
+      })
+    }
   },
   handleError(error) {
     if (typeof error != 'string') {
         error = JSON.stringify(error)
     }
     util.showError(error)
+  },
+  upper(e) {
+    util.loading()
+    this.messageIterator.next().then((result) => {
+      util.loaded()
+      if (result.done) {
+        util.toast('没有更多消息了')
+      }
+      var firstMsgId
+      if (this.data.msgs.length > 0) {
+        firstMsgId = this.data.msgs[0].id
+      }
+      addMsgs(result.value, true)
+
+      if (firstMsgId) {
+        this.setData({
+          toView: firstMsgId
+        })
+      }
+    }, (error) => {
+      util.loaded()
+      this.handleError(error)
+    })
+  },
+  lower(e){
+    console.log(e)
+  },
+  scroll(e) {
+    console.log(e)
   }
 })
