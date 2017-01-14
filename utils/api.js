@@ -43,11 +43,11 @@ function request(path, method, params, successFn, failFn) {
       method: method,
       success: (res) => {
         var resp = res.data
-        console.log(resp)
         if (resp.status == 'success') {
+          console.log(resp.result)
           successFn(resp.result)
         } else {
-          console.log('status error')
+          console.log('status error ' + resp.status + ' error:' + resp.error)
           failFn(resp.status, resp.error)
         }
       },

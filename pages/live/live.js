@@ -9,15 +9,15 @@ var TextMessage = lcChat.TextMessage
 var messageType = lcChat.messageType
 var TypedMessage = lcChat.TypedMessage
 
-export const WxAudioMessage = inherit(TypedMessage)
+const WxAudioMessage = inherit(TypedMessage)
 var WxAudioType = 1
 messageType(WxAudioType)(WxAudioMessage)
 
-export const SystemMessage = inherit(TypedMessage)
+const SystemMessage = inherit(TypedMessage)
 var SystemMessageType = 2
 messageType(SystemMessageType)(SystemMessage)
 
-export const RewardMessage = inherit(TypedMessage)
+const RewardMessage = inherit(TypedMessage)
 var RewardMessageType = 3
 messageType(RewardMessageType)(RewardMessage)
 
@@ -45,11 +45,17 @@ Page({
     changeTitle: '',
     currentTab: 0,
     msgs: [],
-    inputMsg: ''
+    inputMsg: '',
+    client: {},
+    curUser: {}
   },
-  onLoad: function (query) {
+  onLoad (query) {
     this.setData({
      liveId: query.liveId
+    })
+    var app = getApp()
+    this.setData({
+      curUser: app.globalData.currentUser
     })
     this.loadLive()
   },
@@ -89,6 +95,7 @@ Page({
                   videoSrc: this.videoSrc(),
                   changeTitle: this.changeTitle()
                 })
+                this.openClient()
                 cb && cb()
          })
       })
@@ -120,9 +127,44 @@ Page({
     })
   },
   sendMsg() {
-    
   },
   showRewardForm() {
-
+  },
+  addSystemMsg(msg) {
+    var textMsg = new TextMessage(msg)
+    textMsg.setAttributes({username:'系统'})
+    this.addMsg(textMsg)
+  },
+  convertMsg(lcMsg) {
+    var msg = {}
+    msg.type = lcMsg.type
+    msg.attributes = {}
+    msg.attributes.username = lcMsg.attributes.username
+    msg.text = lcMsg.text
+    return msg
+  },
+  addMsg(msg) {
+    var cMsg = this.convertMsg(msg)
+    this.data.msgs.push(cMsg)
+    console.log(this.data.msgs)
+    this.setData({
+      msgs: this.data.msgs
+    })
+  },
+  openClient() {
+    this.addSystemMsg('正在连接聊天服务器...')
+    realtime.createIMClient(this.data.curUser.userId + '')
+      .then((client) => {
+        this.client = client
+        this.addSystemMsg('聊天服务器连接成功')
+        // this.registerEvent()
+        // this.fetchConv()
+      }).catch(this.handleError)
+  },
+  handleError(error) {
+    if (typeof error != 'string') {
+        error = JSON.stringify(error)
+    }
+    util.showError(error)
   }
 })
