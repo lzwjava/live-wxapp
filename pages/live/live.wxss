@@ -148,13 +148,11 @@
 .bubble-msg .name {
 	color: #868686;
 	float: left;
+	font-size: 32rpx;
 }
 
-.bubble-msg .content {
+.bubble-msg .content  {
 	overflow: hidden;
-}
-
-.bubble-msg .content .bubble {
 	max-width: 85%;
 	min-height: 28rpx;
 	margin: 0 20rpx;
@@ -165,52 +163,14 @@
 	position: relative;
 }
 
-.bubble-msg .content .bubble:before,
-.bubble-msg .content .bubble:after {
-	border: 5px solid transparent;
-	content: " ";
-	position: absolute;
-	top: 16rpx;
-	right: 100%;
-}
-
-.bubble-msg .content .bubble:after {
-	border-right-color: #fff;
-	border-right-width: 5px;
-}
-
-.bubble-msg .content .bubble .bubble-cont {
-	word-wrap: break-word;
-	word-break: break-all;
-	min-height: 50rpx;
-}
-
-.bubble-msg .content .bubble .audio-content .voice {
-	width: 80rpx;
-	padding: 0px 0px;
-}
-
-.bubble-msg .content .bubble .audio-content .voice .voice-gray {
-	background: url("../../img/sprite.png") 0 -2427px;
-	width: 46px;
-	height: 46px;
-	display: inline-block;
-	vertical-align: middle;
-	background-size: 150px 2489px;
-}
-
-.bubble-msg .content .bubble .text-content .plain {
+.text-content {
 	padding: 6rpx 10rpx;
-	font-size: 28px;
-}
-
-.bubble-msg .content .bubble .text-content .plain pre {
 	word-wrap: break-word;
 	word-break: normal;
-	white-space: pre-wrap;
+	font-size: 32rpx;
 }
 
-.bubble-msg .content .bubble .text-content .plain .reward-text {
+.text-content.reward-text {
 	color: #d65239;
 }
 

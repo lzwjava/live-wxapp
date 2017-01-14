@@ -49,6 +49,7 @@ Page({
     curUser: {},
     toView: ''
   },
+  isLoading: false,
   messageIterator:{},
   client: {},
   conv: {},
@@ -164,6 +165,7 @@ Page({
     } else {
       newMsgs = this.data.msgs.concat(cMsgs)
     }
+
     this.setData({
       msgs: newMsgs
     })
@@ -220,8 +222,13 @@ Page({
     util.showError(error)
   },
   upper(e) {
+    if (this.isLoading) {
+      return
+    }
+    this.isLoading = true
     util.loading()
     this.messageIterator.next().then((result) => {
+      this.isLoading = false
       util.loaded()
       if (result.done) {
         util.toast('没有更多消息了')
@@ -230,14 +237,18 @@ Page({
       if (this.data.msgs.length > 0) {
         firstMsgId = this.data.msgs[0].id
       }
-      addMsgs(result.value, true)
 
-      if (firstMsgId) {
-        this.setData({
-          toView: firstMsgId
-        })
-      }
+      this.addMsgs(result.value, true)
+
+      setTimeout(() => {
+        if (firstMsgId) {
+          this.setData({
+            toView: firstMsgId
+          })
+        }
+      }, 100)
     }, (error) => {
+      this.isLoading = false
       util.loaded()
       this.handleError(error)
     })

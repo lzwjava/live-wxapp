@@ -65,17 +65,11 @@
              <text class="name">{{msg.attributes.username}}</text>
 
              <view class="content">
-               <view class="bubble">
-                 <view class="text-content bubble-cont" wx:if="{{msg.type == -1}}">
-                   <view class="plain">
-                     <text class="text">{{msg.text}}</text>
-                   </view>
-                 </view>
-                 <view class="text-content bubble-cont" wx:if="{{msg.type == 3}}">
-                   <view class="plain">
-                     <text class="text reward-text">{{msg.text}}</text>
-                   </view>
-                 </view>
+               <view class="text-content plain-text" wx:if="{{msg.type == -1}}">
+                 {{msg.text}}
+               </view>
+               <view class="text-content reward-text" wx:if="{{msg.type == 3}}">
+                 {{msg.text}}
                </view>
              </view>
            </view>
