@@ -257,6 +257,6 @@ Page({
     console.log(e)
   },
   scroll(e) {
-    console.log(e)
+    // console.log(e)
   }
 })
