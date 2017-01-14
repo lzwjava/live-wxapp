@@ -49,7 +49,7 @@
   </view>
 
   <view class="chat-area tab-sub-area"
-       wx:if="currentTab == 0">
+       wx:if="{{currentTab == 0}}">
 
     <ul class="msg-list">
 
@@ -85,24 +85,17 @@
 
     <view class="send-area">
 
-      <!-- <a class="packet-btn" bindtap="showRewardForm"></a> -->
+      <button class="packet-btn" bindtap="showRewardForm"></button>
 
-      <view class="input-ways">
+      <input class="text-input" type="text" value="{{inputMsg}}"></input>
 
-        <view class="text-input">
-
-          <input type="text" value="inputMsg"></input>
-          <button type="button" class="btn btn-gray" bindtap="sendMsg">发送</button>
-
-        </view>
-
-      </view>
+      <button type="button" class="btn btn-gray btn-send" bindtap="sendMsg">发送</button>
 
     </view>
 
   </view>
 
-  <view class="notice-area tab-sub-area" v-show="currentTab == 1">
+  <view class="notice-area tab-sub-area" wx:if="{{currentTab == 1}}">
 
   </view>
 

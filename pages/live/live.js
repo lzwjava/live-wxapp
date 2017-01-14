@@ -21,7 +21,6 @@ export const RewardMessage = inherit(TypedMessage)
 var RewardMessageType = 3
 messageType(RewardMessageType)(RewardMessage)
 
-
 var prodAppId = 's83aTX5nigX1KYu9fjaBTxIa-gzGzoHsz'
 
 var realtime = new Realtime({
@@ -45,7 +44,8 @@ Page({
     videoContext: {},
     changeTitle: '',
     currentTab: 0,
-    msgs: []
+    msgs: [],
+    inputMsg: ''
   },
   onLoad: function (query) {
     this.setData({
@@ -118,5 +118,11 @@ Page({
     this.loadLive(() => {
       this.canPlayClick()
     })
+  },
+  sendMsg() {
+    
+  },
+  showRewardForm() {
+
   }
 })
