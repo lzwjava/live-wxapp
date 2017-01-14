@@ -264,6 +264,7 @@ Page({
     var textMsg = new TextMessage(this.data.inputMsg)
     textMsg.setAttributes({username:this.data.curUser.username})
     this.commonSendMsg(textMsg, (msg) => {
+       this.scrollToBottom()
        this.setData({
          inputMsg: ''
        })
