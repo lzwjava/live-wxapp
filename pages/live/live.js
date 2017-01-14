@@ -53,6 +53,7 @@ Page({
   messageIterator:{},
   client: {},
   conv: {},
+  isSending: false,
   onLoad (query) {
     this.setData({
      liveId: query.liveId
@@ -129,10 +130,6 @@ Page({
     this.loadLive(() => {
       this.canPlayClick()
     })
-  },
-  sendMsg() {
-  },
-  showRewardForm() {
   },
   addSystemMsg(msg) {
     var textMsg = new TextMessage(msg)
@@ -254,9 +251,45 @@ Page({
     })
   },
   lower(e){
-    console.log(e)
+    // console.log(e)
   },
   scroll(e) {
     // console.log(e)
-  }
+  },
+  sendMsg(e) {
+    if(!this.data.inputMsg) {
+      utils.toast('请输入点什么~')
+      return
+    }
+    var textMsg = new TextMessage(this.data.inputMsg)
+    textMsg.setAttributes({username:this.data.curUser.username})
+    this.commonSendMsg(textMsg, (msg) => {
+       this.setData({
+         inputMsg: ''
+       })
+     })
+  },
+  commonSendMsg(msg, cb) {
+    if (this.isSending) {
+      util.toast('请等待上一条消息发送完成');
+      return
+    }
+    this.isSending = true
+    this.conv.send(msg)
+     .then((message) => {
+        this.isSending = false
+        this.addMsg(message)
+        cb && cb(message)
+      }, (error) => {
+        this.isSending = false
+        this.handleError(error)
+      })
+  },
+  msgInput(e) {
+    this.setData({
+      inputMsg: e.detail.value
+    })
+  },
+  showRewardForm() {
+  },
 })

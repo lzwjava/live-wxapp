@@ -82,7 +82,7 @@
 
       <button class="packet-btn" bindtap="showRewardForm"></button>
 
-      <input class="text-input" type="text" value="{{inputMsg}}"></input>
+      <input class="text-input" bindinput="msgInput" type="text" value="{{inputMsg}}"></input>
 
       <button type="button" class="btn btn-gray btn-send" bindtap="sendMsg">发送</button>
 
