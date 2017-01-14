@@ -2,6 +2,8 @@
 
 <view class="live-view">
 
+  <image class="bg" src="../../img/blur.jpg" mode="scaleFill"></image>
+
   <view class="player-area">
 
     <view class="video-wait video-common" wx:if="{{live.status == 10}}">
@@ -80,7 +82,7 @@
 
     <view class="send-area">
 
-      <button class="packet-btn" bindtap="showRewardForm"></button>
+      <!-- <button class="packet-btn" bindtap="showRewardForm"></button> -->
 
       <input class="text-input" bindinput="msgInput" type="text" value="{{inputMsg}}"></input>
 

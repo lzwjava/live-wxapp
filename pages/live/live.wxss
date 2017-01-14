@@ -1,10 +1,33 @@
 @import '../../lib/wemark/wemark.wxss'
 
+.live-view {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.live-view .bg {
+	position: fixed;
+	filter: blur(15px);
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background:rgba(255,255,255,0.4);
+}
+
 .player-area {
 	width: 100%;
   height: 470rpx;
 	position: relative;
 	background-color: #383838;
+	top: 0;
+	left: 0;
+	right: 0;
 }
 
 .player-area .big-title {
@@ -193,7 +216,7 @@
 }
 
 .send-area .text-input {
-	width: 550rpx;
+	width: 600rpx;
   line-height: 60rpx;
   display: inline-block;
 	height: 60rpx;
