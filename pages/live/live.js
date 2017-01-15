@@ -53,6 +53,7 @@ Page({
   messageIterator:{},
   client: {},
   conv: {},
+  cachedUsers: {},
   isSending: false,
   onLoad (query) {
     this.setData({
@@ -134,6 +135,7 @@ Page({
   addSystemMsg(msg) {
     var textMsg = new TextMessage(msg)
     textMsg.setAttributes({username:'系统'})
+    textMsg.from = '0'
     this.addMsg(textMsg)
   },
   convertMsg(lcMsg) {
@@ -150,21 +152,28 @@ Page({
     msgs.push(msg)
     this.addMsgs(msgs)
   },
-  addMsgs(msgs, insertBefore) {
-    var cMsgs = []
+  addMsgs(msgs, insertBefore, cb) {
+    var userIds = []
     msgs.forEach((msg) => {
-      var cMsg = this.convertMsg(msg)
-      cMsgs.push(cMsg)
+      userIds.push(msg.from)
     })
-    var newMsgs
-    if (insertBefore) {
-      newMsgs = cMsgs.concat(this.data.msgs)
-    } else {
-      newMsgs = this.data.msgs.concat(cMsgs)
-    }
 
-    this.setData({
-      msgs: newMsgs
+    this.cacheUsers(userIds, () => {
+      var cMsgs = []
+      msgs.forEach((msg) => {
+        var cMsg = this.convertMsg(msg)
+        cMsg.from = this.cachedUsers[msg.from]
+        cMsgs.push(cMsg)
+      })
+      var newMsgs
+      if (insertBefore) {
+        newMsgs = cMsgs.concat(this.data.msgs)
+      } else {
+        newMsgs = this.data.msgs.concat(cMsgs)
+      }
+      this.setData({
+        msgs: newMsgs
+      })
     })
   },
   openClient() {
@@ -187,18 +196,16 @@ Page({
         return
       }
       this.conv = conv
+      return this.conv.join()
+    }).then(() => {
       this.addSystemMsg('正在加载聊天记录...')
       var messageIterator = this.conv.createMessagesIterator({ limit: 100 })
       this.messageIterator =  messageIterator
       return this.messageIterator.next()
     }).then((result)=> {
-
       if (result.done) {
       }
       this.addMsgs(result.value)
-
-      return this.conv.join()
-    }).then((conv) => {
 
       this.scrollToBottom()
 
@@ -250,7 +257,7 @@ Page({
       this.handleError(error)
     })
   },
-  lower(e){
+  lower(e) {
     // console.log(e)
   },
   scroll(e) {
@@ -293,4 +300,30 @@ Page({
   },
   showRewardForm() {
   },
+  cacheUsers(userIds, cb) {
+    var i
+    var nonCacheIds = []
+    userIds.forEach((userId) => {
+      if (this.cachedUsers[userId] == null) {
+          nonCacheIds.push(userId)
+      }
+    })
+    this.findUsers(nonCacheIds, (users) => {
+      users.forEach((user) => {
+        this.cachedUsers[user.userId] = user
+      })
+      cb && cb()
+    })
+  },
+  findUsers(userIds, cb) {
+    if (userIds.length == 0) {
+      cb && cb([])
+      return
+    }
+    api.post('users/list', {
+      'userIds': JSON.stringify(userIds)
+    }, (users) => {
+      cb && cb(users)
+    })
+  }
 })

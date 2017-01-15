@@ -10,7 +10,6 @@
 
 .live-view .bg {
 	position: fixed;
-	filter: blur(15px);
 	width: 100%;
 	height: 100%;
 	left: 0;
@@ -165,36 +164,55 @@
 /*bubble-msg*/
 
 .bubble-msg {
-	margin-bottom: 10rpx;
+	min-height: 60rpx;
 }
 
-.bubble-msg .name {
-	color: #868686;
-	float: left;
-	font-size: 32rpx;
+.bubble-msg .avatar {
+	border-radius: 50%;
+	width: 60rpx;
+	height: 60rpx;
 }
 
-.bubble-msg .content  {
-	overflow: hidden;
-	max-width: 85%;
-	min-height: 28rpx;
-	margin: 0 20rpx;
-	border-radius: 6rpx;
-	vertical-align: top;
-	background-color: #fff;
+.bubble-msg .right-view {
 	display: inline-block;
+	margin-left: 10rpx;
+}
+
+.right-view .name {
+	color: #ECECEC;
+	opacity: 0.8;
+	font-size: 24rpx;
+}
+
+.right-view .content {
+	color: #fff;
+	max-width: 600rpx;
 	position: relative;
 }
 
-.text-content {
-	padding: 6rpx 10rpx;
+.right-view .content .bg {
+	background-color: #819EC9;
+	opacity: 0.3;
+	filter: blur(2px);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 3px;
+}
+
+.right-view .content .text-content {
+	font-size: 28rpx;
+	padding: 10rpx 10rpx;
+	line-height: 35rpx;
 	word-wrap: break-word;
-	word-break: normal;
-	font-size: 32rpx;
+	text-shadow:#000 2px 2px 3px;
+	z-index: 3;
 }
 
 .text-content.reward-text {
-	color: #d65239;
+	color: #FF4747;
 }
 
 /*send-area*/

@@ -64,16 +64,26 @@
 
            <view class="bubble-msg" wx:if="{{msg.type !=2}}">
 
-             <text class="name">{{msg.attributes.username}}</text>
+             <image class="avatar" src="{{msg.from.avatarUrl}}" mode="aspectFill"></image>
 
-             <view class="content">
-               <view class="text-content plain-text" wx:if="{{msg.type == -1}}">
-                 {{msg.text}}
+             <view class="right-view">
+
+               <text class="name">{{msg.from.username}}</text>
+
+               <view class="content">
+
+                 <view class="bg"></view>
+
+                 <view class="text-content plain-text" wx:if="{{msg.type == -1}}">
+                   {{msg.text}}
+                 </view>
+                 <view class="text-content reward-text" wx:if="{{msg.type == 3}}">
+                   {{msg.text}}
+                 </view>
                </view>
-               <view class="text-content reward-text" wx:if="{{msg.type == 3}}">
-                 {{msg.text}}
-               </view>
+
              </view>
+
            </view>
 
          </view>
