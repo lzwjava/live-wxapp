@@ -72,7 +72,7 @@
 
                <view class="content">
 
-                 <view class="bg"></view>
+                 <!-- <view class="bg"></view> -->
 
                  <view class="text-content plain-text" wx:if="{{msg.type == -1}}">
                    {{msg.text}}
@@ -94,7 +94,15 @@
 
       <!-- <button class="packet-btn" bindtap="showRewardForm"></button> -->
 
-      <input class="text-input" bindinput="msgInput" type="text" value="{{inputMsg}}"></input>
+
+
+      <view class="input-area">
+
+        <input class="text-input" bindinput="msgInput" placeholder="和主播聊点什么" type="text" value="{{inputMsg}}"></input>
+
+      </view>
+
+
 
       <button type="button" class="btn btn-gray btn-send" bindtap="sendMsg">发送</button>
 
