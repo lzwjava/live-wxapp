@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "live-wxapp",
   "scripts": {
+    "uploadqn": "qshell qupload uploadqn.json"
   },
   "repository": {
     "type": "git",

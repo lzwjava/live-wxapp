@@ -1,0 +1,8 @@
+{
+   "src_dir"            :   "img",
+   "access_key"         :   "-ON85H3cEMUaCuj8UFpLELeEunEAqslrqYqLbn9g",
+   "secret_key"         :   "X-oHOYDinDEhNk5nr74O1rKDvkmPq0ZQwEZfFt6x",
+   "bucket"             :   "mquzhibo",
+   "overwrite"          :   false,
+   "rescan_local"       :   true
+}

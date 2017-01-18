@@ -99,7 +99,7 @@
 .video-poster-cover .video-center .canplay {
 	width: 100%;
 	height: 100%;
-	background: url("../../img/video-play.png") center no-repeat;
+	background: url("http://mres.quzhiboapp.com/video-play.png") center no-repeat;
 	background-size: 100% 100%;
 }
 
@@ -285,9 +285,9 @@
 }
 
 .btn-send.normal {
-	background-image: url('../../img/send_normal.png');
+	background-image: url('http://mres.quzhiboapp.com/send_normal.png');
 }
 
 .btn-send.active {
-	background-image: url('../../img/send_active.png');
+	background-image: url('http://mres.quzhiboapp.com/send_active.png');
 }
