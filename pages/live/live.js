@@ -139,9 +139,12 @@ Page({
     textMsg.from = '0'
     this.addMsg(textMsg)
   },
+  convertId(msgId) {
+    return msgId.replace(/\+/g, '')
+  },
   convertMsg(lcMsg) {
     var msg = {}
-    msg.id = lcMsg.id
+    msg.id = this.convertId(lcMsg.id)
     msg.type = lcMsg.type
     msg.attributes = {}
     if (!lcMsg.attributes) {
@@ -178,6 +181,7 @@ Page({
       this.setData({
         msgs: newMsgs
       })
+      cb && cb()
     })
   },
   openClient() {
@@ -209,9 +213,9 @@ Page({
     }).then((result)=> {
       if (result.done) {
       }
-      this.addMsgs(result.value)
-
-      this.scrollToBottom()
+      this.addMsgs(result.value, false, () => {
+        this.scrollToBottom()
+      })
 
     }).catch(this.handleError)
   },
@@ -246,15 +250,14 @@ Page({
         firstMsgId = this.data.msgs[0].id
       }
 
-      this.addMsgs(result.value, true)
-
-      setTimeout(() => {
+      this.addMsgs(result.value, true, () => {
         if (firstMsgId) {
           this.setData({
             toView: firstMsgId
           })
         }
-      }, 100)
+      })
+
     }, (error) => {
       this.isLoading = false
       util.loaded()
