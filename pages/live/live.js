@@ -47,7 +47,8 @@ Page({
     msgs: [],
     inputMsg: '',
     curUser: {},
-    toView: ''
+    toView: '',
+    canSend: false
   },
   isLoading: false,
   messageIterator:{},
@@ -143,6 +144,9 @@ Page({
     msg.id = lcMsg.id
     msg.type = lcMsg.type
     msg.attributes = {}
+    if (!lcMsg.attributes) {
+      lcMsg.attributes = {}
+    }
     msg.attributes.username = lcMsg.attributes.username
     msg.text = lcMsg.text
     return msg
@@ -265,7 +269,7 @@ Page({
   },
   sendMsg(e) {
     if(!this.data.inputMsg) {
-      utils.toast('请输入点什么~')
+      util.toast('请输入点什么~')
       return
     }
     var textMsg = new TextMessage(this.data.inputMsg)
@@ -294,8 +298,16 @@ Page({
       })
   },
   msgInput(e) {
+    var inputMsg = e.detail.value
+    var canSend
+    if (inputMsg.trim().length > 0) {
+      canSend = true
+    } else {
+      canSend = false
+    }
     this.setData({
-      inputMsg: e.detail.value
+      inputMsg: inputMsg,
+      canSend: canSend
     })
   },
   showRewardForm() {
@@ -304,10 +316,12 @@ Page({
     var i
     var nonCacheIds = []
     userIds.forEach((userId) => {
-      if (this.cachedUsers[userId] == null) {
-          nonCacheIds.push(userId)
+      if (this.cachedUsers[userId] == null &&
+          nonCacheIds.indexOf(userId) == -1) {
+            nonCacheIds.push(userId)
       }
     })
+    console.log('nonCacheIds: ' + JSON.stringify(nonCacheIds))
     this.findUsers(nonCacheIds, (users) => {
       users.forEach((user) => {
         this.cachedUsers[user.userId] = user

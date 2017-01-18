@@ -94,17 +94,11 @@
 
       <!-- <button class="packet-btn" bindtap="showRewardForm"></button> -->
 
-
-
       <view class="input-area">
-
         <input class="text-input" bindinput="msgInput" placeholder="和主播聊点什么" type="text" value="{{inputMsg}}"></input>
-
       </view>
 
-
-
-      <button type="button" class="btn btn-gray btn-send" bindtap="sendMsg">发送</button>
+      <view class="btn-send {{canSend ? 'active': 'normal'}}" bindtap="sendMsg"></view>
 
     </view>
 
