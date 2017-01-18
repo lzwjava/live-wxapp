@@ -32,21 +32,15 @@ Page({
   onReady (){
     console.log('ready liveId: ' + this.data.liveId)
 
-
   },
   loadLive() {
     util.loading()
-    console.log('loadLive')
     api.get('lives/' + this.data.liveId, null,
        (data) => {
          util.loaded()
 
-         console.log('load live finish ' + JSON.stringify(data))
-
-         this.setData({
-           live: data,
-           btnTitle: this.btnTitle(data)
-         })
+        //  data.speakerIntro = ''
+        //  data.detail = ''
 
          wemark.parse(data.speakerIntro, this, {
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
@@ -57,7 +51,14 @@ Page({
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
            name: 'wemarkDetail'
          })
-      })
+
+         this.setData({
+           live: data,
+           btnTitle: this.btnTitle(data)
+         })
+         
+      }
+    )
   },
   attendLive() {
     if (this.data.live.canJoin) {
