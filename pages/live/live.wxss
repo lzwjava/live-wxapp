@@ -258,8 +258,13 @@
 	flex-grow: 1;
 	display: inline-block;
 	height: 70rpx;
-	position: relative;
+	box-sizing: border-box;
+	padding-left: 20rpx;
 	padding-right: 20rpx;
+	padding-top: 5rpx;
+	padding-bottom: 5rpx;
+	margin-right: 10rpx;
+	position: relative;
 }
 
 .send-area .input-area:after {
