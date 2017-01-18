@@ -2,7 +2,7 @@
 
 <view class="live-view">
 
-  <image class="bg" src="../../img/blur.jpg" mode="scaleFill"></image>
+  <image class="bg" src="http://mres.quzhiboapp.com/blur.jpg" mode="scaleFill"></image>
 
   <view class="player-area">
 
@@ -11,11 +11,11 @@
       <view class="small-title">开播时您将收到一条微信通知~</view>
       <view class="small-title">可打开 quzhiboapp.com 在电脑上观看</view>
       <view class="small-title">另可长按加微信进入用户群和主播聊聊</view>
-      <image class="qrcode" src="../../img/qrcode_me_3.jpg" alt="" mode="widthFix"></image>
+      <image class="qrcode" src="http://mres.quzhiboapp.com/qrcode_me_3.jpg" alt="" mode="widthFix"></image>
     </view>
 
     <view class="video-on" wx:if="{{live.status == 20 || live.status == 25 || live.status == 30}}">
-      <video id="myVideo" src="{{videoSrc}}" controls objectFit="cover"></video>
+      <video id="myVideo" src="{{videoSrc}}" controls objectFit="cover" hidden="{{playStatus == 0}}"></video>
 
       <view class="video-poster-cover" wx:if="{{playStatus != 2}}">
 
@@ -23,7 +23,7 @@
 
         <view class="video-center">
 
-          <image class="loading-img" wx:if="{{playStatus == 1}}" src="../../img/video-circle.png"></image>
+          <image class="loading-img" wx:if="{{playStatus == 1}}" src="http://mres.quzhiboapp.com/video-circle.png"></image>
 
           <view class="canplay" wx:if="{{playStatus == 0}}" bindtap="canPlayClick"></view>
 
@@ -53,8 +53,10 @@
   <view class="chat-area tab-sub-area"
        wx:if="{{currentTab == 0}}">
 
-       <scroll-view class="msg-list" scroll-y="true" bindscrolltoupper="upper"
+       <scroll-view class="msg-list" disable-scroll="true" scroll-y="true" bindscrolltoupper="upper"
          bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
+
+       <!-- <view class="msg-list"> -->
 
          <view class="msg" wx:for-item="msg" wx:for="{{msgs}}" id="{{msg.id}}">
 
@@ -87,6 +89,8 @@
            </view>
 
          </view>
+
+      <!-- </view> -->
 
        </scroll-view>
 

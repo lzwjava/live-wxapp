@@ -111,7 +111,9 @@ Page({
     this.setData({
       playStatus: 1
     })
-    this.videoContext.play()
+    setTimeout(() => {
+      this.videoContext.play()
+    }, 0)    
     setTimeout(() => {
       this.setData({
         playStatus: 2
@@ -324,7 +326,6 @@ Page({
             nonCacheIds.push(userId)
       }
     })
-    console.log('nonCacheIds: ' + JSON.stringify(nonCacheIds))
     this.findUsers(nonCacheIds, (users) => {
       users.forEach((user) => {
         this.cachedUsers[user.userId] = user

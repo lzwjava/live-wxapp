@@ -161,3 +161,7 @@
 .detail-section {
   margin-bottom: 110rpx;
 }
+
+.wemark_inline_text {
+  word-wrap: break-word;
+}
