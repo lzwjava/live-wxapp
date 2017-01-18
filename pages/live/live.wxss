@@ -16,6 +16,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
+	filter: blur(2px);
 	background:rgba(255,255,255,0.4);
 }
 
@@ -232,9 +233,13 @@
 	position: absolute;
 	height: 90rpx;
 	bottom: 0rpx;
+	width: 730rpx;
 	box-sizing: border-box;
 	padding-top: 10rpx;
+	padding-left: 10rpx;
+	padding-right: 10rpx;
 	padding-bottom: 10rpx;
+	display: flex;
 }
 
 .send-area .bg {
@@ -250,15 +255,11 @@
 }
 
 .send-area .input-area {
-	width: 650rpx;
-	padding-left: 20rpx;
-	padding-right: 20rpx;
-	padding-top: 5rpx;
-	padding-bottom: 5rpx;
+	flex-grow: 1;
 	display: inline-block;
 	height: 70rpx;
-	box-sizing: border-box;
 	position: relative;
+	padding-right: 20rpx;
 }
 
 .send-area .input-area:after {
@@ -283,7 +284,6 @@
 .send-area .btn-send {
 	width: 60rpx;
 	height: 60rpx;
-	margin-left: 10rpx;
 	display: inline-block;
 	background-size: cover;
 	background-repeat: no-repeat;
