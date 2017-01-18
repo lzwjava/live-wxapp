@@ -11,9 +11,11 @@ Page({
     wemark: {},
     wemarkDetail: {}
   },
-  onLoad: function (query) {
+  onLoad (query) {
+
+    console.log('onLoad liveId: ' + query.liveId)
     this.setData({
-     liveId:query.liveId
+     liveId: query.liveId
     })
 
     this.loadLive()
@@ -25,12 +27,21 @@ Page({
         attendedUsers: data
       })
     })
+
+  },
+  onReady (){
+    console.log('ready liveId: ' + this.data.liveId)
+
+
   },
   loadLive() {
     util.loading()
+    console.log('loadLive')
     api.get('lives/' + this.data.liveId, null,
        (data) => {
          util.loaded()
+
+         console.log('load live finish ' + JSON.stringify(data))
 
          this.setData({
            live: data,
@@ -47,8 +58,6 @@ Page({
            name: 'wemarkDetail'
          })
       })
-  },
-  onReady() {
   },
   attendLive() {
     if (this.data.live.canJoin) {

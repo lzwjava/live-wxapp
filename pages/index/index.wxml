@@ -3,28 +3,28 @@
 <view class="lives">
 
     <view class="live-item" data-live-id="{{live.liveId}}"
-       wx:for="{{lives}}" wx:for-item="live" bindtap="liveItemViewTap">
+          wx:for="{{lives}}" wx:for-item="live" catchtap="liveItemViewTap">
 
-      <image class="avatar" src="{{live.owner.avatarUrl}}" mode="aspectFill"></image>
+        <image class="avatar" src="{{live.owner.avatarUrl}}" mode="aspectFill"></image>
 
-      <view class="live-info" >
+        <view class="live-info">
 
             <text class="subject">{{live.subject}}</text>
             <text class="owner-name">{{live.owner.username}}</text>
 
             <text class="time-label live-item-tag" wx:if="{{live.status == 10}}">
-              {{live.timeGap}}  开始
+                {{live.timeGap}} 开始
             </text>
 
             <text class="on-label live-item-tag" wx:if="{{live.status == 20 || live.status == 25}}">
-              正在直播
+                正在直播
             </text>
 
             <text class="attend-label live-item-tag" wx:if="{{live.status == 30 || live.status == 35}}">
-              {{live.attendanceCount}} 人参与
+                {{live.attendanceCount}} 人参与
             </text>
 
-      </view>
+        </view>
 
     </view>
 
