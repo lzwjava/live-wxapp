@@ -196,7 +196,7 @@
 	position: relative;
 }
 
-.right-view .content:before {
+.right-view .content::after {
 	content: '';
 	background-color: #819EC9;
 	opacity: 0.3;
@@ -216,6 +216,10 @@
 	word-wrap: break-word;
 	text-shadow:#000 2px 2px 3px;
 	z-index: 3;
+}
+
+.text-content.plain-text {
+	color: #fff;
 }
 
 .text-content.reward-text {
