@@ -42,6 +42,10 @@ Page({
         //  data.speakerIntro = ''
         //  data.detail = ''
 
+        wx.setNavigationBarTitle({
+          title: data.owner.username + '的直播'
+        })
+
          wemark.parse(data.speakerIntro, this, {
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
            name: 'wemark'
@@ -53,10 +57,13 @@ Page({
          })
 
          this.setData({
-           live: data,
-           btnTitle: this.btnTitle(data)
+           live: data
          })
-         
+
+         this.setData({
+            btnTitle: this.btnTitle(data)
+         })
+
       }
     )
   },

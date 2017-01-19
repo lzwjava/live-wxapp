@@ -92,11 +92,9 @@
 
       <!-- </view> -->
 
-       </scroll-view>
+    </scroll-view>
 
     <view class="send-area">
-
-      <!-- <button class="packet-btn" bindtap="showRewardForm"></button> -->
 
       <view class="input-area">
         <input class="text-input" bindinput="msgInput" placeholder="和主播聊点什么" type="text" value="{{inputMsg}}"></input>

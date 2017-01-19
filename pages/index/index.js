@@ -21,6 +21,11 @@ Page({
     })
   },
   onLoad () {
+
+    wx.setNavigationBarTitle({
+      title: '趣直播'
+    })
+
     app.fetchCurrentUser(() => {
       api.get('lives/on', null,  (data) => {
         data.forEach(live =>
@@ -31,5 +36,7 @@ Page({
         })
       })
     })
+  },
+  onReady() {
   }
 })

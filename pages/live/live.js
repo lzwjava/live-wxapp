@@ -94,6 +94,11 @@ Page({
          api.get('lives/' + this.data.liveId + '/videos',
               null, (videos) => {
                 util.loaded()
+
+                wx.setNavigationBarTitle({
+                  title: live.owner.username + '的直播'
+                })
+
                 this.setData({
                   live: live,
                   videos: videos
@@ -113,7 +118,7 @@ Page({
     })
     setTimeout(() => {
       this.videoContext.play()
-    }, 0)    
+    }, 0)
     setTimeout(() => {
       this.setData({
         playStatus: 2
