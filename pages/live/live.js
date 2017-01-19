@@ -48,7 +48,8 @@ Page({
     inputMsg: '',
     curUser: {},
     toView: '',
-    canSend: false
+    canSend: false,
+    unreadCount: 0
   },
   isLoading: false,
   messageIterator:{},
@@ -56,6 +57,9 @@ Page({
   conv: {},
   cachedUsers: {},
   isSending: false,
+  scrollHeight: 0,
+  scrollTop: 0,
+  offsetHeight: 1000,
   onLoad (query) {
     this.setData({
      liveId: query.liveId
@@ -185,9 +189,45 @@ Page({
       } else {
         newMsgs = this.data.msgs.concat(cMsgs)
       }
+      var toView
+      if (insertBefore) {
+        if (cMsgs.length > 0 ) {
+          var lastMsg = cMsgs[cMsgs.length - 1]
+          toView = lastMsg.id
+        }
+      } else {
+        if (newMsgs.length > 0) {
+          var lastMsg = newMsgs[newMsgs.length - 1]
+          toView = lastMsg.id
+        }
+      }
+
+      var toScroll
+      if (insertBefore || (this.offsetHeight == 1000) ||
+          (this.scrollHeight < this.scrollTop + this.offsetHeight + 100)) {
+        toScroll = true
+      } else {
+        toScroll = false
+      }
+
+      if (!insertBefore) {
+        if (!toScroll) {
+          this.setData({
+            unreadCount: (this.data.unreadCount + 1)
+          })
+        }
+      }
+
       this.setData({
         msgs: newMsgs
       })
+      if (toView && toScroll) {
+        setTimeout(() => {
+          this.setData({
+            toView: toView
+          })
+        }, 0)
+      }
       cb && cb()
     })
   },
@@ -199,9 +239,22 @@ Page({
         this.client = client
 
         this.addSystemMsg('聊天服务器连接成功')
-        // this.registerEvent()
+        this.registerEvent()
         this.fetchConv()
       }).catch(this.handleError)
+  },
+  registerEvent() {
+    this.client.on('message', (message, conversation) => {
+      if (message.type == TextMessage.TYPE) {
+        this.addMsg(message)
+      } else if (message.type == SystemMessageType){
+        this.addMsg(message)
+      } else if (message.type == RewardMessageType) {
+        this.addMsg(message)
+      } else {
+        this.addSystemMsg('此消息暂不支持显示')
+      }
+    })
   },
   fetchConv() {
     this.client.getConversation(this.data.live.conversationId)
@@ -221,7 +274,7 @@ Page({
       if (result.done) {
       }
       this.addMsgs(result.value, false, () => {
-        this.scrollToBottom()
+
       })
 
     }).catch(this.handleError)
@@ -258,11 +311,11 @@ Page({
       }
 
       this.addMsgs(result.value, true, () => {
-        if (firstMsgId) {
-          this.setData({
-            toView: firstMsgId
-          })
-        }
+        // if (firstMsgId) {
+        //   this.setData({
+        //     toView: firstMsgId
+        //   })
+        // }
       })
 
     }, (error) => {
@@ -272,10 +325,17 @@ Page({
     })
   },
   lower(e) {
-    // console.log(e)
+    console.log(e)
+    this.setData({
+      unreadCount: 0
+    })
   },
   scroll(e) {
-    // console.log(e)
+    this.scrollHeight = e.detail.scrollHeight
+    this.scrollTop = e.detail.scrollTop
+    if (this.scrollHeight - this.scrollTop < this.offsetHeight) {
+      this.offsetHeight = this.scrollHeight - this.scrollTop
+    }
   },
   sendMsg(e) {
     if(!this.data.inputMsg) {
@@ -347,6 +407,12 @@ Page({
       'userIds': JSON.stringify(userIds)
     }, (users) => {
       cb && cb(users)
+    })
+  },
+  showNewMsgs() {
+    this.scrollToBottom()
+    this.setData({
+      unreadCount: 0
     })
   }
 })

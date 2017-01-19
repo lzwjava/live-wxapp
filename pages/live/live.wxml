@@ -2,8 +2,6 @@
 
 <view class="live-view">
 
-  <image class="bg" src="http://mres.quzhiboapp.com/blur.jpg" mode="scaleFill"></image>
-
   <view class="player-area">
 
     <view class="video-wait video-common" wx:if="{{live.status == 10}}">
@@ -93,6 +91,8 @@
       <!-- </view> -->
 
     </scroll-view>
+
+    <view class="new-msg-btn" catchtap="showNewMsgs" wx:if="{{unreadCount > 0}}">{{unreadCount}}条新消息</view>
 
     <view class="send-area">
 
