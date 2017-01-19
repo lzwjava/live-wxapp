@@ -33,14 +33,14 @@
 }
 
 .live-item .live-info .live-item-tag {
-  margin-top: 10rpx;
+  margin-top: 5rpx;
 }
 
 .live-item .live-info .owner-name {
 	color: #6e6e6e;
   font-size: 28rpx;
   display: block;
-  margin-top: 10rpx;
+  margin-top: 5rpx;
 }
 
 .live-item .live-info .subject {
