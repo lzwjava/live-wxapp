@@ -25,7 +25,7 @@
                 "text": "直播"
             },
             {
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/profile/profile",
                 "iconPath": "img/tab_me_n.png",
                 "selectedIconPath": "img/tab_me_p.png",
                 "text": "我"
