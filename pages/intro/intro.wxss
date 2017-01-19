@@ -73,29 +73,20 @@
 	font-size: 32rpx;
 }
 
-.time-section .right-corner {
-	float: right;
+.time-section .status {
+  float: right;
 	margin-top: 20rpx;
 	color: #828282;
-}
-
-.time-section .right-corner .status {
 	border: 1px solid #828282;
 	border-radius: 6rpx;
-	padding: 0 6rpx;
+	padding: 5rpx 12rpx;
 	font-size: 28rpx;
 }
 
-.time-section .right-corner .status.live-on {
+.time-section .status.live-on {
 	color: #fff;
 	background-color: #00bdef;
 	border-color: #64b3f1;
-}
-
-.time-section .right-corner .feedback {
-	margin-top: 16rpx;
-	font-size: 28rpx;
-	line-height: 50rpx;
 }
 
 /*attend-summary-section*/

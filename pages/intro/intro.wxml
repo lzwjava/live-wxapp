@@ -19,10 +19,8 @@
 
     <view class="time-section">
 
-      <view class="right-corner">
-        <view class="status">
-            {{statusText}}
-        </view>
+      <view class="status {{ live.status == 20 ? 'live-on': ''}}" >
+          {{statusText}}
       </view>
 
       <view class="time-label">直播时间</view>

@@ -40,7 +40,7 @@ Page({
         wx.setNavigationBarTitle({
           title: data.owner.username + '的直播'
         })
-
+        
          wemark.parse(data.speakerIntro, this, {
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
            name: 'wemark'
