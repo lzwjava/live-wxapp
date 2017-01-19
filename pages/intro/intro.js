@@ -69,9 +69,7 @@ Page({
     )
   },
   attendLive() {
-
     var app = getApp()
-
     if (app.globalData.currentUser == null) {
       app.fetchCurrentUser(() => {
         this.loadLive()

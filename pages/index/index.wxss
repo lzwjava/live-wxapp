@@ -33,21 +33,25 @@
 }
 
 .live-item .live-info .live-item-tag {
-  height: 120rpx;
+  margin-top: 10rpx;
 }
 
 .live-item .live-info .owner-name {
 	color: #6e6e6e;
   font-size: 28rpx;
   display: block;
+  margin-top: 10rpx;
 }
 
-.live-item .live-info p.subject {
-	height: 60rpx;
+.live-item .live-info .subject {
+	height: 80rpx;
+  line-height: 40rpx;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
-	font-weight: bold;
+  font-size: 36rpx;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .live-item .live-info .on-label {
@@ -56,6 +60,7 @@
 	border-color: #64b3f1;
 	border-radius: 6rpx;
 	font-size: 28rpx;
+  display: inline-block;
 }
 
 .live-item .live-info .time-label {
@@ -64,12 +69,11 @@
 	border-radius: 6rpx;
 	padding: 4rpx 6rpx;
 	font-size: 28rpx;
+  display: inline-block;
 }
 
 .live-item .live-info .attend-label {
 	font-size: 28rpx;
-  position: relative;
-  bottom: 50rpx;
 }
 
 .live-item .arrow {

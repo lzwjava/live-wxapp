@@ -149,7 +149,6 @@ Page({
   },
   showIntroTab() {
     var pages = getCurrentPages()
-    console.log(pages)
     if (pages.length >= 3) {
       wx.navigateBack()
     } else {

@@ -9,20 +9,20 @@
 
         <view class="live-info">
 
-            <text class="subject">{{live.subject}}</text>
-            <text class="owner-name">{{live.owner.username}}</text>
+            <view class="subject">{{live.subject}}</view>
+            <view class="owner-name">{{live.owner.username}}</view>
 
-            <text class="time-label live-item-tag" wx:if="{{live.status == 10}}">
+            <view class="time-label live-item-tag" wx:if="{{live.status == 10}}">
                 {{live.timeGap}} 开始
-            </text>
+            </view>
 
-            <text class="on-label live-item-tag" wx:if="{{live.status == 20 || live.status == 25}}">
+            <view class="on-label live-item-tag" wx:if="{{live.status == 20 || live.status == 25}}">
                 正在直播
-            </text>
+            </view>
 
-            <text class="attend-label live-item-tag" wx:if="{{live.status == 30 || live.status == 35}}">
+            <view class="attend-label live-item-tag" wx:if="{{live.status == 30 || live.status == 35}}">
                 {{live.attendanceCount}} 人参与
-            </text>
+            </view>
 
         </view>
 
