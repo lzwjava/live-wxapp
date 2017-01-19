@@ -238,6 +238,13 @@
 	align-items: center;
 }
 
+.chat-area .online-num {
+	z-index: 30;
+	float: right;
+	font-size: 24rpx;
+	color: #ECECEC;
+	margin-right: 20rpx;
+}
 
 /*send-area*/
 

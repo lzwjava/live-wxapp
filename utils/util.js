@@ -64,11 +64,32 @@ function showError(content) {
   })
 }
 
+function statusText (status) {
+  switch (status) {
+    case 1:
+      return '编辑中';
+    case 5:
+      return '审核中';
+    case 10:
+      return '报名中';
+    case 20:
+      return '直播中';
+    case 25:
+      return '转码中';
+    case 30:
+      return '已结束';
+    case 35:
+      return '已结束';
+  }
+  return '未知';
+}
+
 module.exports = {
   formatTime: formatTime,
   timeGap: timeGap,
   loading: loading,
   loaded: loaded,
   toast: toast,
-  showError: showError
+  showError: showError,
+  statusText: statusText
 }

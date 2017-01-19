@@ -9,7 +9,8 @@ Page({
     attendedUsers: [],
     btnTitle: '',
     wemark: {},
-    wemarkDetail: {}
+    wemarkDetail: {},
+    statusText: ''
   },
   onLoad (query) {
 
@@ -27,20 +28,14 @@ Page({
         attendedUsers: data
       })
     })
-
   },
   onReady (){
-    console.log('ready liveId: ' + this.data.liveId)
-
   },
   loadLive() {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
        (data) => {
          util.loaded()
-
-        //  data.speakerIntro = ''
-        //  data.detail = ''
 
         wx.setNavigationBarTitle({
           title: data.owner.username + '的直播'
@@ -61,7 +56,8 @@ Page({
          })
 
          this.setData({
-            btnTitle: this.btnTitle(data)
+            btnTitle: this.btnTitle(data),
+            statusText: this.statusText()
          })
 
       }
@@ -75,6 +71,9 @@ Page({
     } else {
       this.payOrCreateAttend()
     }
+  },
+  statusText()  {
+    return util.statusText(this.data.live.status)
   },
   btnTitle(live) {
     var statusWord;

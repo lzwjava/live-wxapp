@@ -51,10 +51,10 @@
   <view class="chat-area tab-sub-area"
        wx:if="{{currentTab == 0}}">
 
+       <view class="online-num">在线: {{onlineNum}}</view>
+
        <scroll-view class="msg-list" disable-scroll="true" scroll-y="true" bindscrolltoupper="upper"
          bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
-
-       <!-- <view class="msg-list"> -->
 
          <view class="msg" wx:for-item="msg" wx:for="{{msgs}}" id="{{msg.id}}">
 
@@ -87,8 +87,6 @@
            </view>
 
          </view>
-
-      <!-- </view> -->
 
     </scroll-view>
 

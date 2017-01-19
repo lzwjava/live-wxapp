@@ -49,7 +49,8 @@ Page({
     curUser: {},
     toView: '',
     canSend: false,
-    unreadCount: 0
+    unreadCount: 0,
+    onlineNum: 0
   },
   isLoading: false,
   messageIterator:{},
@@ -60,6 +61,7 @@ Page({
   scrollHeight: 0,
   scrollTop: 0,
   offsetHeight: 1000,
+  fetchIntervalId: 0,
   onLoad (query) {
     this.setData({
      liveId: query.liveId
@@ -72,6 +74,16 @@ Page({
   },
   onReady () {
     this.videoContext =  wx.createVideoContext('myVideo')
+  },
+  onHide() {
+    console.log('onHide')
+  },
+  onUnload() {
+    console.log('onUnload')
+    if (this.fetchIntervalId) {
+      clearInterval(this.fetchIntervalId)
+      this.fetchIntervalId = 0
+    }
   },
   videoSrc() {
     var live = this.data.live
@@ -107,6 +119,7 @@ Page({
                   live: live,
                   videos: videos
                 })
+
                 this.setData({
                   videoSrc: this.videoSrc(),
                   changeTitle: this.changeTitle()
@@ -277,7 +290,20 @@ Page({
 
       })
 
+      this.fetchCount()
+      this.fetchIntervalId = setInterval(() => {
+        this.fetchCount()
+      }, 5 * 1000)
+
     }).catch(this.handleError)
+  },
+  fetchCount() {
+    this.conv.count()
+     .then((cnt) => {
+       this.setData({
+         onlineNum: cnt
+       })
+     })
   },
   scrollToBottom() {
     if (this.data.msgs.length > 0) {
