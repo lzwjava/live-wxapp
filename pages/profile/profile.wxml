@@ -1,2 +1,11 @@
 <view class="profile-view">
+
+  <view class="user-cell">
+
+    <image class="avatar" src="{{user.avatarUrl}}"></image>
+
+    <text class="username">{{user.username}}</text>
+
+  </view>
+
 </view>

@@ -1,5 +1,26 @@
 .profile-view {
   width: 100%;
-  height: 300rpx;
-  background-color: #f00;
+  height: 100vh;
+  background-color: #ECEBF3;
+  padding-top: 30rpx;
+}
+
+.user-cell {
+  padding: 20rpx 30rpx;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.user-cell .avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+}
+
+.user-cell .username {
+  flex-grow: 1;
+  margin-left: 20rpx;
 }

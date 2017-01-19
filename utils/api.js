@@ -30,7 +30,7 @@ function request(path, method, params, successFn, failFn) {
     var header = {}
 
     var app = getApp()
-    if (app.globalData.currentUser) {
+    if (app && app.globalData.currentUser) {
       header['X-Session'] = app.globalData.currentUser.sessionToken
     }
 

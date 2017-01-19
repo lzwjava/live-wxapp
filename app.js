@@ -8,13 +8,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.loadCurrentUser()
-  },
-  loadCurrentUser() {
-    var currentUser = wx.getStorageSync('currentUser')
-    this.globalData.currentUser = currentUser
+    setTimeout(() => {
+      this.fetchCurrentUser()
+    }, 0)
   },
   fetchCurrentUser(cb) {
+    var currentUser = wx.getStorageSync('currentUser')
+    this.globalData.currentUser = currentUser
     api.get('self', null, (user) => {
       this.updateUser(user)
       cb && cb(user)

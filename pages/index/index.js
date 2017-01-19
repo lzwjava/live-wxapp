@@ -21,11 +21,6 @@ Page({
     })
   },
   onLoad () {
-
-    wx.setNavigationBarTitle({
-      title: '趣直播'
-    })
-
     var app = getApp()
     app.globalData.shareLive = null;
 

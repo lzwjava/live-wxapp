@@ -1,7 +1,11 @@
 Page({
   data: {
+    user: {}
   },
   onLoad() {
-    console.log('profile onLoad')
+    var app = getApp()
+    this.setData({
+      user: app.globalData.currentUser
+    })
   }
 })
