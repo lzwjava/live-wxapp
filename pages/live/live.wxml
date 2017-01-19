@@ -37,7 +37,10 @@
   </view>
 
   <view class="tab-area">
-    <view class="chat-tab tab-item {{currentTab == 0 ? 'active': '' }}" bindtap="showChatTab" style="">
+    <view class="intro-tab tab-item" bindtap="showIntroTab">
+      简介
+    </view>
+    <view class="chat-tab tab-item {{currentTab == 0 ? 'active': '' }}" bindtap="showChatTab">
       聊天
     </view>
     <view class="notice-tab tab-item {{currentTab == 1 ? 'active': '' }}" bindtap="showNoticeTab">

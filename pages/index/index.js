@@ -14,11 +14,26 @@ Page({
       url: '../logs/logs'
     })
   },
+  findLive(liveId) {
+    var lives = this.data.lives
+    for(var i = 0; i < lives.length; i++) {
+      if (lives[i].liveId == liveId) {
+        return lives[i]
+      }
+    }
+  },
   liveItemViewTap (event) {
     var liveId = event.currentTarget.dataset.liveId
-    wx.navigateTo({
-      url: '../intro/intro?liveId=' + liveId
-    })
+    var live = this.findLive(liveId)
+    if (live.canJoin) {
+      wx.navigateTo({
+        url: '../live/live?liveId=' + liveId
+      })
+    } else {
+      wx.navigateTo({
+        url: '../intro/intro?liveId=' + liveId
+      })
+    }
   },
   onLoad () {
     var app = getApp()
