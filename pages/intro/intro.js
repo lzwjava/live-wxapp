@@ -31,7 +31,7 @@ Page({
   },
   onReady (){
   },
-  loadLive() {
+  loadLive(cb) {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
        (data) => {
@@ -40,7 +40,7 @@ Page({
         wx.setNavigationBarTitle({
           title: data.owner.username + '的直播'
         })
-        
+
          wemark.parse(data.speakerIntro, this, {
            imageWidth: wx.getSystemInfoSync().windowWidth - 40,
            name: 'wemark'
@@ -59,6 +59,8 @@ Page({
             btnTitle: this.btnTitle(data),
             statusText: this.statusText()
          })
+
+         cb && cb()
 
       }
     )
@@ -121,22 +123,32 @@ Page({
     util.loading()
     return api.post('attendances/create', {
       liveId: this.data.liveId,
-      channel: 'wechat'
+      channel: 'wechat_app'
     }, (data) => {
       util.loaded()
 
+      console.log('pay data')
+      console.log(data)
+
       wx.requestPayment({
-        timestamp: data.timeStamp,
+        timeStamp: data.timeStamp,
         nonceStr: data.nonceStr,
         package: data.package,
         paySign: data.paySign,
         signType: data.signType,
         success: (res) => {
-          util.toast('支付成功')
+          util.toast('报名成功')
+          this.loadLive(() => {
+            this.goLive()
+          })
         },
         fail: (res) => {
-          util.toast('支付失败')
           console.log(res)
+          if (res.err_desc) {
+            util.showError('支付失败: ' + res.err_desc)
+          } else {
+            util.showError('支付失败')
+          }
         }
       })
 

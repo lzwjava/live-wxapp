@@ -10,6 +10,7 @@ App({
     wx.setStorageSync('logs', logs)
   },
   fetchCurrentUser(cb) {
+
     var currentUser = wx.getStorageSync('currentUser')
     this.globalData.currentUser = currentUser
 
