@@ -55,6 +55,9 @@ Page({
            live: data
          })
 
+         var app = getApp()
+         app.globalData.shareLive = data
+
          this.setData({
             btnTitle: this.btnTitle(data),
             statusText: this.statusText()
@@ -66,13 +69,23 @@ Page({
     )
   },
   attendLive() {
-    if (this.data.live.canJoin) {
-      wx.navigateTo({
-        url: '../live/live?liveId=' + this.data.liveId
+
+    var app = getApp()
+
+    if (app.globalData.currentUser == null) {
+      app.fetchCurrentUser(() => {
+        this.loadLive()
       })
     } else {
-      this.payOrCreateAttend()
+      if (this.data.live.canJoin) {
+        wx.navigateTo({
+          url: '../live/live?liveId=' + this.data.liveId
+        })
+      } else {
+        this.payOrCreateAttend()
+      }
     }
+
   },
   statusText()  {
     return util.statusText(this.data.live.status)

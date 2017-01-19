@@ -26,14 +26,15 @@ Page({
       title: '趣直播'
     })
 
-    app.fetchCurrentUser(() => {
-      api.get('lives/on', null,  (data) => {
-        data.forEach(live =>
-          live.timeGap = util.timeGap(live.planTs)
-        )
-        this.setData({
-          lives: data
-        })
+    var app = getApp()
+    app.globalData.shareLive = null;
+
+    api.get('lives/on', null,  (data) => {
+      data.forEach(live =>
+        live.timeGap = util.timeGap(live.planTs)
+      )
+      this.setData({
+        lives: data
       })
     })
   },

@@ -1,14 +1,35 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/intro/intro",
-    "pages/live/live"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/intro/intro",
+        "pages/live/live",
+        "pages/profile/profile"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "趣直播"
+    },
+    "tabBar": {
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
+        "color": "#ddd",
+        "selectedColor": "#00CFF5",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "img/tab_live_n.png",
+                "selectedIconPath": "img/tab_live_p.png",
+                "text": "直播"
+            },
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "img/tab_me_n.png",
+                "selectedIconPath": "img/tab_me_p.png",
+                "text": "我"
+            }
+        ]
+    }
 }

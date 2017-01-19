@@ -8,12 +8,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    this.loadCurrentUser()
   },
-  fetchCurrentUser(cb) {
-
+  loadCurrentUser() {
     var currentUser = wx.getStorageSync('currentUser')
     this.globalData.currentUser = currentUser
-
+  },
+  fetchCurrentUser(cb) {
     api.get('self', null, (user) => {
       this.updateUser(user)
       cb && cb(user)
@@ -69,10 +70,28 @@ App({
   onHide() {
     console.log('onHide')
   },
-  onError() {
+  onError(e) {
     console.log('onError')
+    console.log(e)
   },
   globalData:{
-    currentUser:null
+    currentUser:null,
+    shareLive: null
+  },
+  onShareAppMessage() {
+    if (this.globalData.shareLive) {
+      var live = this.globalData.shareLive
+      return {
+       title: live.owner.username + '在趣直播：' + live.subject,
+       desc: '来自趣直播-知识直播平台',
+       path: '/intro/intro?liveId=' + live.liveId
+     }
+   } else {
+     return {
+       title: '趣直播-知识直播平台',
+       desc: '邀请了大咖来分享知识或经历',
+       path: '/index/index'
+     }
+   }
   }
 })
