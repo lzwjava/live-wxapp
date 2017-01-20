@@ -51,7 +51,8 @@ Page({
     canSend: false,
     unreadCount: 0,
     onlineNum: 0,
-    noticeContent: ''
+    noticeContent: '',
+    animation: {}
   },
   isLoading: false,
   messageIterator:{},
@@ -75,11 +76,14 @@ Page({
     })
 
     this.cacheUsers([0])
-    
+
     this.loadLive()
   },
   onReady () {
     this.videoContext =  wx.createVideoContext('myVideo')
+  },
+  onShow() {
+
   },
   onHide() {
     console.log('onHide')
@@ -166,6 +170,16 @@ Page({
       })
   },
   canPlayClick() {
+    this.animation = wx.createAnimation({
+      duration: 500
+    })
+    this.animation.opacity(1).rotate(360).step()
+    var data = this.animation.export()
+
+    this.setData({
+      animation: data
+    })
+
     this.setData({
       playStatus: 1
     })
@@ -176,7 +190,7 @@ Page({
       this.setData({
         playStatus: 2
       })
-    }, 1000)
+    }, 500)
   },
   showChatTab() {
     this.setData({
