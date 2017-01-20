@@ -1,31 +1,13 @@
 <!--index.wxml-->
 
+<import src="../../templates/live-item/live-item.wxml"/>
+
 <view class="lives">
 
-    <view class="live-item" data-live-id="{{live.liveId}}"
-          wx:for="{{lives}}" wx:for-item="live" catchtap="liveItemViewTap">
+  <block wx:key="liveIndex" wx:for="{{lives}}" wx:for-item="live">
 
-        <image class="avatar" src="{{live.owner.avatarUrl}}" mode="aspectFill"></image>
+    <template is="live-item" data="{{...live}}"></template>
 
-        <view class="live-info">
-
-            <view class="subject">{{live.subject}}</view>
-            <view class="owner-name">{{live.owner.username}}</view>
-
-            <view class="time-label live-item-tag" wx:if="{{live.status == 10}}">
-                {{live.timeGap}} 开始
-            </view>
-
-            <view class="on-label live-item-tag" wx:if="{{live.status == 20 || live.status == 25}}">
-                正在直播
-            </view>
-
-            <view class="attend-label live-item-tag" wx:if="{{live.status == 30 || live.status == 35}}">
-                {{live.attendanceCount}} 人参与
-            </view>
-
-        </view>
-
-    </view>
+  </block>
 
 </view>

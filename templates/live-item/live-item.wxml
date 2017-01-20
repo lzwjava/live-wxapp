@@ -1,0 +1,28 @@
+<template name="live-item">
+
+  <view class="live-item"  data-live-id="{{liveId}}" catchtap="liveItemViewTap">
+
+    <image class="avatar" src="{{owner.avatarUrl}}" mode="aspectFill"></image>
+
+    <view class="live-info">
+
+        <view class="subject">{{subject}}</view>
+        <view class="owner-name">{{owner.username}}</view>
+
+        <view class="time-label live-item-tag" wx:if="{{status == 10}}">
+            {{timeGap}} 开始
+        </view>
+
+        <view class="on-label live-item-tag" wx:if="{{status == 20 || status == 25}}">
+            正在直播
+        </view>
+
+        <view class="attend-label live-item-tag" wx:if="{{status == 30 || status == 35}}">
+            {{attendanceCount}} 人参与
+        </view>
+
+    </view>
+
+  </view>
+
+</template>

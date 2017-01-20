@@ -1,85 +1,8 @@
 /**index.wxss**/
 
+@import "../../templates/live-item/live-item.wxss"
+
 .lives {
   width: 100%;
   height: 100%;
-}
-
-.live-item {
-	background-color: #fff;
-	height: 160rpx;
-	padding: 20rpx 20rpx;
-	position: relative;
-	border-bottom: 2rpx solid #eee;
-}
-
-.live-item .avatar {
-	width: 100rpx;
-	height: 100rpx;
-	display: inline-block;
-	margin-top: 30rpx;
-  border-radius: 50%;
-  vertical-align: top;
-}
-
-.live-item .live-info {
-  display: inline-block;
-  position: relative;
-  width: 600rpx;
-  height: 160rpx;
-  box-sizing: border-box;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-}
-
-.live-item .live-info .live-item-tag {
-  margin-top: 5rpx;
-}
-
-.live-item .live-info .owner-name {
-	color: #6e6e6e;
-  font-size: 28rpx;
-  display: block;
-  margin-top: 5rpx;
-}
-
-.live-item .live-info .subject {
-	height: 80rpx;
-  line-height: 40rpx;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	word-wrap: break-word;
-  font-size: 36rpx;
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.live-item .live-info .on-label {
-	color: #fff;
-	background-color: #00bdef;
-	border-color: #64b3f1;
-	border-radius: 6rpx;
-	font-size: 28rpx;
-  display: inline-block;
-}
-
-.live-item .live-info .time-label {
-	color: #00bdef;
-	border: 1px solid #00bdef;
-	border-radius: 6rpx;
-	padding: 4rpx 6rpx;
-	font-size: 28rpx;
-  display: inline-block;
-}
-
-.live-item .live-info .attend-label {
-	font-size: 28rpx;
-}
-
-.live-item .arrow {
-	float: right;
-	color: #cecee0;
-	width: 48rpx;
-	height: 48rpx;
-	margin-top: 50rpx;
 }
