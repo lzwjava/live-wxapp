@@ -4,7 +4,8 @@
         "pages/logs/logs",
         "pages/intro/intro",
         "pages/live/live",
-        "pages/profile/profile"
+        "pages/profile/profile",
+        "pages/attended/attended"
     ],
     "window": {
         "backgroundTextStyle": "light",

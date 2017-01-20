@@ -50,7 +50,8 @@ Page({
     toView: '',
     canSend: false,
     unreadCount: 0,
-    onlineNum: 0
+    onlineNum: 0,
+    noticeContent: ''
   },
   isLoading: false,
   messageIterator:{},
@@ -103,6 +104,10 @@ Page({
       return '切换视频线路'
     }
   },
+  defaultNotice() {
+      return '\n可长按二维码加微信进用户群和主播聊聊：\n\n' +
+      ' ![wechat_lzw_short.png](http://i.quzhiboapp.com/qrcode_me_small.jpg)'
+  },
   loadLive(cb) {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
@@ -113,6 +118,11 @@ Page({
 
                 wx.setNavigationBarTitle({
                   title: live.owner.username + '的直播'
+                })
+
+                wemark.parse(live.notice + this.defaultNotice(), this, {
+                  imageWidth: wx.getSystemInfoSync().windowWidth / 2,
+                  name: 'noticeContent'
                 })
 
                 this.setData({
@@ -149,7 +159,9 @@ Page({
   },
   showIntroTab() {
     var pages = getCurrentPages()
-    if (pages.length >= 3) {
+    var lastPage = pages[pages.length - 2]
+
+    if (lastPage.__route__ == 'pages/intro/intro') {
       wx.navigateBack()
     } else {
       wx.navigateTo({

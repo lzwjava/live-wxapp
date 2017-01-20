@@ -5,13 +5,17 @@
   padding-top: 30rpx;
 }
 
-.user-cell {
-  padding: 20rpx 30rpx;
-  display: flex;
+.cell {
+  padding: 30rpx 30rpx;
   box-sizing: border-box;
+  background-color: #fff;
+  margin-bottom: 30rpx;
+}
+
+.user-cell {
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
 }
 
 .user-cell .avatar {
@@ -23,4 +27,5 @@
 .user-cell .username {
   flex-grow: 1;
   margin-left: 20rpx;
+  font-size: 44rpx;
 }

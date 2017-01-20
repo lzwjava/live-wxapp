@@ -34,7 +34,7 @@
 
     <view class="attend-info">
       <ul class="attended-users">
-        <li class="avatar-cell" wx:for-item="u" wx:for="{{attendedUsers}}">
+        <li class="avatar-cell" wx:key="userIndex" wx:for-item="u" wx:for="{{attendedUsers}}">
           <image class="avatar" src="{{u.avatarUrl}}" mode="aspectFill"></image>
         </li>
       </ul>

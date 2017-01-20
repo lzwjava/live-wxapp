@@ -310,3 +310,23 @@
 .btn-send.active {
 	background-image: url('http://mres.quzhiboapp.com/send_active.png');
 }
+
+/*notice*/
+
+.notice-area {
+	display: flex;
+	justify-content: center;
+	padding: 30rpx;
+}
+
+.wemark_inline_text {
+	color: #fff;
+}
+
+.wemark_inline_image {
+	width: 50%;
+}
+
+.notice-view {
+
+}

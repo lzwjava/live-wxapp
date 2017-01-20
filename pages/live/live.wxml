@@ -109,7 +109,10 @@
 
   <view class="notice-area tab-sub-area" wx:if="{{currentTab == 1}}">
 
-  </view>
+    <scroll-view class="notice-view" scroll-y="true">
+      <template is="wemark" data="{{...noticeContent}}"></template>
+    </scroll-view>
 
+  </view>
 
 </view>

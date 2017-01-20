@@ -1,12 +1,8 @@
 var api = require('../../utils/api')
 var util = require('../../utils/util')
 
-var app = getApp()
-
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
     lives: []
   },
   bindViewTap () {

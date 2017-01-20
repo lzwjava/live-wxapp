@@ -1,0 +1,11 @@
+<import src="../../templates/live-item/live-item.wxml"/>
+
+<view class="lives">
+
+  <block wx:key="liveIndex" wx:for="{{lives}}" wx:for-item="live">
+
+    <template is="live-item" data="{{...live}}"></template>
+
+  </block>
+
+</view>

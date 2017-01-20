@@ -1,10 +1,16 @@
 <view class="profile-view">
 
-  <view class="user-cell">
+  <view class="user-cell cell">
 
     <image class="avatar" src="{{user.avatarUrl}}"></image>
 
     <text class="username">{{user.username}}</text>
+
+  </view>
+
+  <view class="cell" catchtap="goMyLives">
+
+    <text>我参加的直播</text>
 
   </view>
 
