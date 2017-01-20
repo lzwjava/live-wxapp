@@ -108,6 +108,17 @@ Page({
       return '\n可长按二维码加微信进用户群和主播聊聊：\n\n' +
       ' ![wechat_lzw_short.png](http://i.quzhiboapp.com/qrcode_me_small.jpg)'
   },
+  reloadLive(cb) {
+    util.loading()
+    api.get('lives/' + this.data.liveId, null,
+       (live) => {
+         util.loaded()
+         this.setData({
+           live: live
+         })
+         cb && cb()
+      })
+  },
   loadLive(cb) {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
@@ -115,6 +126,10 @@ Page({
          api.get('lives/' + this.data.liveId + '/videos',
               null, (videos) => {
                 util.loaded()
+
+                if (live.liveId == 239) {
+                  live.status = 20;
+                }
 
                 wx.setNavigationBarTitle({
                   title: live.owner.username + '的直播'
@@ -175,7 +190,7 @@ Page({
     })
   },
   changeLiveUrl() {
-    this.loadLive(() => {
+    this.reloadLive(() => {
       this.canPlayClick()
     })
   },

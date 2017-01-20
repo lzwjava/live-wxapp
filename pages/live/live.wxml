@@ -61,9 +61,9 @@
 
          <view class="msg" wx:key="msgIndex" wx:for-item="msg" wx:for="{{msgs}}" id="{{msg.id}}">
 
-           <view class="system-msg" wx:if="{{msg.type == 2 && live.status != 30}}">
+           <!-- <view class="system-msg" wx:if="{{msg.type == 2 && live.status != 30}}">
              <view class="content">{{msg.text}}</view>
-           </view>
+           </view> -->
 
            <view class="bubble-msg" wx:if="{{msg.type !=2}}">
 
