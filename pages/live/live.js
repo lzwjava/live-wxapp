@@ -63,6 +63,8 @@ Page({
   scrollTop: 0,
   offsetHeight: 1000,
   fetchIntervalId: 0,
+  liveViewId: 0,
+  endIntervalId: 0,
   onLoad (query) {
     this.setData({
      liveId: query.liveId
@@ -85,6 +87,8 @@ Page({
       clearInterval(this.fetchIntervalId)
       this.fetchIntervalId = 0
     }
+    this.endLiveView()
+    this.endInterval()
   },
   videoSrc() {
     var live = this.data.live
@@ -127,10 +131,6 @@ Page({
               null, (videos) => {
                 util.loaded()
 
-                if (live.liveId == 239) {
-                  live.status = 20;
-                }
-
                 wx.setNavigationBarTitle({
                   title: live.owner.username + '的直播'
                 })
@@ -149,6 +149,14 @@ Page({
                   videoSrc: this.videoSrc(),
                   changeTitle: this.changeTitle()
                 })
+
+                this.startLiveView(live)
+                this.endInterval()
+
+                this.endIntervalId = setInterval(() => {
+                  this.endLiveView()
+                }, 1000 * 30)
+
                 this.openClient()
                 cb && cb()
          })
@@ -477,5 +485,30 @@ Page({
     this.setData({
       unreadCount: 0
     })
-  }
+  },
+  startLiveView(live) {
+    api.post('liveViews', {
+      liveId: live.liveId,
+      platform: 'wechat_app',
+      liveStatus: live.status
+    }, (data) => {
+      this.liveViewId = data.liveViewId
+    })
+  },
+  endLiveView() {
+    if (this.liveViewId != 0) {
+      api.get('liveViews/' + this.liveViewId + '/end', null,
+        (resp) => {
+
+        }, (status, error) => {
+          
+        })
+    }
+  },
+  endInterval() {
+    if (this.endIntervalId != 0) {
+      clearInterval(this.endIntervalId)
+      this.endIntervalId =0
+    }
+  },
 })
