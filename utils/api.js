@@ -10,7 +10,7 @@ function apiErrorFn(status, error) {
   wx.showModal({
     title: '出错了',
     content: content,
-    success: function(res) {
+    success: (res) => {
       if (res.confirm) {
         console.log('用户点击确定')
       }
@@ -53,7 +53,7 @@ function request(path, method, params, successFn, failFn) {
       },
       fail: () => {
         console.log('request fail')
-        failFn('network_error', res.error)
+        failFn('network_error', '网络错误')
       },
       complete: () => {
 

@@ -73,6 +73,9 @@ Page({
     this.setData({
       curUser: app.globalData.currentUser
     })
+
+    this.cacheUsers([0])
+    
     this.loadLive()
   },
   onReady () {
@@ -226,68 +229,68 @@ Page({
   addMsg(msg) {
     var msgs = []
     msgs.push(msg)
-    this.addMsgs(msgs)
+    this.cacheAndAndMsgs(msgs)
+  },
+  cacheAndAndMsgs(msgs, insertBefore, cb) {
+    this.cacheMsgs(msgs, () => {
+      this.addMsgs(msgs, insertBefore, cb)
+    })
   },
   addMsgs(msgs, insertBefore, cb) {
-    var userIds = []
+    var cMsgs = []
     msgs.forEach((msg) => {
-      userIds.push(msg.from)
+      var cMsg = this.convertMsg(msg)
+      cMsg.from = this.cachedUsers[msg.from]
+      cMsgs.push(cMsg)
     })
+    var newMsgs
+    if (insertBefore) {
+      newMsgs = cMsgs.concat(this.data.msgs)
+    } else {
+      newMsgs = this.data.msgs.concat(cMsgs)
+    }
+    var toView
+    if (insertBefore) {
+      // 加载的旧消息的最后一条
+      if (cMsgs.length > 0 ) {
+        var lastMsg = cMsgs[cMsgs.length - 1]
+        toView = lastMsg.id
+      }
+    } else {
+      // 所有消息的最后一条
+      if (newMsgs.length > 0) {
+        var lastMsg = newMsgs[newMsgs.length - 1]
+        toView = lastMsg.id
+      }
+    }
 
-    this.cacheUsers(userIds, () => {
-      var cMsgs = []
-      msgs.forEach((msg) => {
-        var cMsg = this.convertMsg(msg)
-        cMsg.from = this.cachedUsers[msg.from]
-        cMsgs.push(cMsg)
-      })
-      var newMsgs
-      if (insertBefore) {
-        newMsgs = cMsgs.concat(this.data.msgs)
-      } else {
-        newMsgs = this.data.msgs.concat(cMsgs)
-      }
-      var toView
-      if (insertBefore) {
-        if (cMsgs.length > 0 ) {
-          var lastMsg = cMsgs[cMsgs.length - 1]
-          toView = lastMsg.id
-        }
-      } else {
-        if (newMsgs.length > 0) {
-          var lastMsg = newMsgs[newMsgs.length - 1]
-          toView = lastMsg.id
-        }
-      }
+    var toScroll
+    if (insertBefore || (this.offsetHeight == 1000) ||
+        (this.scrollHeight < this.scrollTop + this.offsetHeight + 100)) {
+      toScroll = true
+    } else {
+      toScroll = false
+    }
 
-      var toScroll
-      if (insertBefore || (this.offsetHeight == 1000) ||
-          (this.scrollHeight < this.scrollTop + this.offsetHeight + 100)) {
-        toScroll = true
-      } else {
-        toScroll = false
+    if (!insertBefore) {
+      if (!toScroll) {
+        this.setData({
+          unreadCount: (this.data.unreadCount + 1)
+        })
       }
+    }
 
-      if (!insertBefore) {
-        if (!toScroll) {
-          this.setData({
-            unreadCount: (this.data.unreadCount + 1)
-          })
-        }
-      }
-
-      this.setData({
-        msgs: newMsgs
-      })
-      if (toView && toScroll) {
-        setTimeout(() => {
-          this.setData({
-            toView: toView
-          })
-        }, 0)
-      }
-      cb && cb()
+    this.setData({
+      msgs: newMsgs
     })
+    if (toView && toScroll) {
+      setTimeout(() => {
+        this.setData({
+          toView: toView
+        })
+      }, 0)
+    }
+    cb && cb()
   },
   openClient() {
     this.addSystemMsg('正在连接聊天服务器...')
@@ -331,7 +334,7 @@ Page({
     }).then((result)=> {
       if (result.done) {
       }
-      this.addMsgs(result.value, false, () => {
+      this.cacheAndAndMsgs(result.value, false, () => {
 
       })
 
@@ -372,23 +375,23 @@ Page({
     util.loading()
     this.messageIterator.next().then((result) => {
       this.isLoading = false
-      util.loaded()
+
       if (result.done) {
+        util.loaded()
         util.toast('没有更多消息了')
+        return
       }
       var firstMsgId
       if (this.data.msgs.length > 0) {
         firstMsgId = this.data.msgs[0].id
       }
 
-      this.addMsgs(result.value, true, () => {
-        // if (firstMsgId) {
-        //   this.setData({
-        //     toView: firstMsgId
-        //   })
-        // }
-      })
+      this.cacheMsgs(result.value, () => {
+        util.loaded()
+        this.addMsgs(result.value, true, () => {
 
+        })
+      })
     }, (error) => {
       this.isLoading = false
       util.loaded()
@@ -469,6 +472,15 @@ Page({
       cb && cb()
     })
   },
+  cacheMsgs(msgs, cb) {
+    var userIds = []
+    msgs.forEach((msg) => {
+      userIds.push(msg.from)
+    })
+    this.cacheUsers(userIds, () => {
+      cb && cb()
+    })
+  },
   findUsers(userIds, cb) {
     if (userIds.length == 0) {
       cb && cb([])
@@ -501,7 +513,7 @@ Page({
         (resp) => {
 
         }, (status, error) => {
-          
+
         })
     }
   },

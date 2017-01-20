@@ -56,8 +56,9 @@
 
        <view class="online-num">在线: {{onlineNum}}</view>
 
-       <scroll-view class="msg-list" disable-scroll="true" scroll-y="true" bindscrolltoupper="upper"
-         bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}">
+       <scroll-view class="msg-list" disable-scroll="true" scroll-y="true"
+         bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+         upper-threshold="100" scroll-into-view="{{toView}}">
 
          <view class="msg" wx:key="msgIndex" wx:for-item="msg" wx:for="{{msgs}}" id="{{msg.id}}">
 
