@@ -32,8 +32,6 @@ Page({
     }
   },
   onLoad () {
-    var app = getApp()
-    app.globalData.shareLive = null;
 
     api.get('lives/on', null,  (data) => {
       data.forEach(live =>
@@ -45,5 +43,8 @@ Page({
     })
   },
   onReady() {
+  },
+  onShareAppMessage() {
+   return util.appShareData()
   }
 })

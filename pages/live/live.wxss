@@ -47,6 +47,10 @@
 	flex-direction: column;
 }
 
+.video-error {
+	height: 100%;
+}
+
 .player-area .video-wait .qrcode {
 	width: 160rpx;
 	margin-top: 10rpx;
@@ -203,9 +207,8 @@
 	padding: 10rpx 10rpx;
 	line-height: 35rpx;
 	word-wrap: break-word;
-	text-shadow:#000 2px 2px 3px;
-	background-color: rgba(0,0,0,0.3);
-	border-radius: 5rpx;
+	background-color: rgba(0,34,70,0.3);
+	border-radius: 10rpx;
 }
 
 .text-content.plain-text {

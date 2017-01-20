@@ -55,9 +55,6 @@ Page({
            live: data
          })
 
-         var app = getApp()
-         app.globalData.shareLive = data
-
          this.setData({
             btnTitle: this.btnTitle(data),
             statusText: this.statusText()
@@ -174,5 +171,8 @@ Page({
       util.show('报名成功')
       this.goLive()
     })
+  },
+  onShareAppMessage() {
+    return util.shareData(this.data.live)
   }
 })

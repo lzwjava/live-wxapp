@@ -20,5 +20,8 @@ Page({
     wx.navigateTo({
       url: '../live/live?liveId=' + liveId
     })
+  },
+  onShareAppMessage() {
+   return util.appShareData()
   }
 })

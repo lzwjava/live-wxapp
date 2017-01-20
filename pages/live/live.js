@@ -537,4 +537,7 @@ Page({
       this.endIntervalId =0
     }
   },
+  onShareAppMessage() {
+    return util.shareData(this.data.live)
+  }
 })

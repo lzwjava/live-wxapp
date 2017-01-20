@@ -84,6 +84,22 @@ function statusText (status) {
   return '未知';
 }
 
+function shareData(live) {
+  return {
+   title: live.owner.username + '在趣直播：' + live.subject,
+   desc: '来自趣直播-知识直播平台',
+   path: '/pages/intro/intro?liveId=' + live.liveId
+ }
+}
+
+function appShareData() {
+  return {
+    title: '趣直播-知识直播平台',
+    desc: '邀请了大咖来分享知识或经历',
+    path: '/pages/index/index'
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   timeGap: timeGap,
@@ -91,5 +107,7 @@ module.exports = {
   loaded: loaded,
   toast: toast,
   showError: showError,
-  statusText: statusText
+  statusText: statusText,
+  shareData: shareData,
+  appShareData: appShareData
 }

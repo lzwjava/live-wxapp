@@ -75,23 +75,6 @@ App({
     console.log(e)
   },
   globalData:{
-    currentUser:null,
-    shareLive: null
-  },
-  onShareAppMessage() {
-    if (this.globalData.shareLive) {
-      var live = this.globalData.shareLive
-      return {
-       title: live.owner.username + '在趣直播：' + live.subject,
-       desc: '来自趣直播-知识直播平台',
-       path: '/intro/intro?liveId=' + live.liveId
-     }
-   } else {
-     return {
-       title: '趣直播-知识直播平台',
-       desc: '邀请了大咖来分享知识或经历',
-       path: '/index/index'
-     }
-   }
+    currentUser:null
   }
 })

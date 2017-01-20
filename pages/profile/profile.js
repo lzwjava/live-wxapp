@@ -12,5 +12,8 @@ Page({
     wx.navigateTo({
       url: '../attended/attended'
     })
+  },
+  onShareAppMessage() {
+   return util.appShareData()
   }
 })
