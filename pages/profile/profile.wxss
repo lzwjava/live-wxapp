@@ -29,3 +29,21 @@
   margin-left: 20rpx;
   font-size: 44rpx;
 }
+
+.contact-area {
+  background-color: rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 30rpx;
+  right: 30rpx;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx;
+  border-radius: 5rpx;
+}
+
+.contact-area .title {
+  font-size: 28rpx;
+  color: #fff;
+}

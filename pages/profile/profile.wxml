@@ -14,4 +14,9 @@
 
   </view>
 
+  <view class="contact-area">
+    <contact-button class="contact-btn" type="default-light" size="40" session-from="weapp"></contact-button>
+    <view class="title">客服</view>
+  </view>
+
 </view>
