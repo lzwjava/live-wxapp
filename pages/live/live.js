@@ -204,15 +204,16 @@ Page({
   },
   showIntroTab() {
     var pages = getCurrentPages()
-    var lastPage = pages[pages.length - 2]
-
-    if (lastPage.__route__ == 'pages/intro/intro') {
-      wx.navigateBack()
-    } else {
-      wx.navigateTo({
-        url: '../intro/intro?liveId=' + this.data.liveId
-      })
+    if (pages.length >= 2) {
+      var lastPage = pages[pages.length - 2]
+      if (lastPage.__route__ == 'pages/intro/intro') {
+        wx.navigateBack()
+        return
+      }
     }
+    wx.navigateTo({
+      url: '../intro/intro?liveId=' + this.data.liveId
+    })
   },
   showNoticeTab() {
     this.setData({
@@ -313,7 +314,8 @@ Page({
   },
   openClient() {
     this.addSystemMsg('正在连接聊天服务器...')
-    realtime.createIMClient(this.data.curUser.userId + '')
+    var clientId = this.data.curUser.userId + ''
+    realtime.createIMClient(clientId)
       .then((client) => {
 
         this.client = client
