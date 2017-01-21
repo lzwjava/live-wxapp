@@ -69,6 +69,7 @@ Page({
     this.setData({
      liveId: query.liveId
     })
+
     var app = getApp()
     this.setData({
       curUser: app.globalData.currentUser
@@ -320,7 +321,10 @@ Page({
         this.addSystemMsg('聊天服务器连接成功')
         this.registerEvent()
         this.fetchConv()
-      }).catch(this.handleError)
+
+      }).catch((error) => {
+        this.addSystemMsg('连接聊天服务器失败 ' + error)
+      })
   },
   registerEvent() {
     this.client.on('message', (message, conversation) => {
@@ -361,7 +365,9 @@ Page({
         this.fetchCount()
       }, 5 * 1000)
 
-    }).catch(this.handleError)
+    }).catch((error) => {
+      this.addSystemMsg('加载聊天记录失败：' + error)
+    })
   },
   fetchCount() {
     this.conv.count()
@@ -386,6 +392,9 @@ Page({
     util.showError(error)
   },
   upper(e) {
+    if (!this.messageIterator) {
+      return
+    }
     if (this.isLoading) {
       return
     }
@@ -548,5 +557,11 @@ Page({
       desc: '来自趣直播-知识直播平台',
       path: '/pages/live/live?liveId=' + live.liveId
     }
+  },
+  viewQrcode(e) {
+    console.log(e)
+    wx.previewImage({
+      urls: ['http://mres.quzhiboapp.com/qrcode_me_3.jpg']
+    })
   }
 })

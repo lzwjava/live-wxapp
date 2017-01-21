@@ -45,10 +45,11 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	height: 100%;
 }
 
 .video-error {
-	height: 100%;
+
 }
 
 .player-area .video-wait .qrcode {

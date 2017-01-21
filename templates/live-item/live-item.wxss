@@ -37,12 +37,12 @@
 }
 
 .live-item .live-info .subject {
-	height: 80rpx;
-  line-height: 40rpx;
+	height: 70rpx;
+  line-height: 35rpx;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	word-wrap: break-word;
-  font-size: 36rpx;
+  font-size: 34rpx;
   display: table-cell;
   vertical-align: middle;
 }

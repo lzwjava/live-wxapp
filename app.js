@@ -5,12 +5,10 @@ var util = require('./utils/util')
 App({
   onLaunch () {
     //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    setTimeout(() => {
-      this.fetchCurrentUser()
-    }, 0)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
+    this.fetchCurrentUser()
   },
   fetchCurrentUser(cb) {
     var currentUser = wx.getStorageSync('currentUser')
