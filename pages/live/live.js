@@ -74,6 +74,11 @@ Page({
       curUser: app.globalData.currentUser
     })
 
+    if (!this.data.curUser) {
+      this.redirectToIntro()
+      return
+    }
+
     this.cacheUsers([0])
 
     this.loadLive()
@@ -129,6 +134,11 @@ Page({
          cb && cb()
       })
   },
+  redirectToIntro() {
+    wx.redirectTo({
+      url: '../intro/intro?liveId=' + this.data.liveId
+    })
+  },
   loadLive(cb) {
     util.loading()
     api.get('lives/' + this.data.liveId, null,
@@ -136,9 +146,7 @@ Page({
 
          if (!live.canJoin) {
            util.loaded()
-           wx.redirectTo({
-             url: '../intro/intro?liveId=' + this.data.liveId
-           })
+           this.redirectToIntro()
            return
          }
 

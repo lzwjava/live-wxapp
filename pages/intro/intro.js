@@ -168,8 +168,10 @@ Page({
       liveId: this.data.liveId
     }, (data) => {
       util.loaded()
-      util.show('报名成功')
-      this.goLive()
+      util.toast('报名成功')
+      this.loadLive(() => {
+        this.goLive()
+      })
     })
   },
   onShareAppMessage() {
