@@ -51,8 +51,7 @@ Page({
     canSend: false,
     unreadCount: 0,
     onlineNum: 0,
-    noticeContent: '',
-    animation: {}
+    noticeContent: ''
   },
   isLoading: false,
   messageIterator:{},
@@ -134,6 +133,15 @@ Page({
     util.loading()
     api.get('lives/' + this.data.liveId, null,
        (live) => {
+
+         if (!live.canJoin) {
+           util.loaded()
+           wx.redirectTo({
+             url: '../intro/intro?liveId=' + this.data.liveId
+           })
+           return
+         }
+
          api.get('lives/' + this.data.liveId + '/videos',
               null, (videos) => {
                 util.loaded()
@@ -170,27 +178,15 @@ Page({
       })
   },
   canPlayClick() {
-    this.animation = wx.createAnimation({
-      duration: 500
-    })
-    this.animation.opacity(1).rotate(360).step()
-    var data = this.animation.export()
-
-    this.setData({
-      animation: data
-    })
 
     this.setData({
       playStatus: 1
     })
+
     setTimeout(() => {
       this.videoContext.play()
-    }, 0)
-    setTimeout(() => {
-      this.setData({
-        playStatus: 2
-      })
-    }, 500)
+    }, 10)
+
   },
   showChatTab() {
     this.setData({
@@ -538,6 +534,11 @@ Page({
     }
   },
   onShareAppMessage() {
-    return util.shareData(this.data.live)
+    var live = this.data.live
+    return {
+      title: live.owner.username + '在趣直播：' + live.subject,
+      desc: '来自趣直播-知识直播平台',
+      path: '/pages/live/live?liveId=' + live.liveId
+    }
   }
 })

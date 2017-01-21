@@ -92,6 +92,14 @@ function shareData(live) {
  }
 }
 
+function shareDataAtLive(live) {
+  return {
+   title: live.owner.username + '在趣直播：' + live.subject,
+   desc: '来自趣直播-知识直播平台',
+   path: '/pages/live/live?liveId=' + live.liveId
+ }
+}
+
 function appShareData() {
   return {
     title: '趣直播-知识直播平台',
@@ -109,5 +117,6 @@ module.exports = {
   showError: showError,
   statusText: statusText,
   shareData: shareData,
-  appShareData: appShareData
+  appShareData: appShareData,
+  shareDataAtLive: shareDataAtLive
 }

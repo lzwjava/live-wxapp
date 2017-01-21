@@ -13,17 +13,15 @@
     </view>
 
     <view class="video-on" wx:if="{{live.status == 20 || live.status == 25 || live.status == 30}}">
-      <video id="myVideo" src="{{videoSrc}}" controls objectFit="cover" hidden="{{playStatus != 2}}"></video>
+      <video id="myVideo" src="{{videoSrc}}" controls objectFit="cover" hidden="{{playStatus == 0}}"></video>
 
-      <view class="video-poster-cover" wx:if="{{playStatus != 2}}">
+      <view class="video-poster-cover" wx:if="{{playStatus == 0}}">
 
         <image class="cover-image" src="{{live.coverUrl}}" mode="scaleToFill"></image>
 
         <view class="video-center">
 
-          <view animation="{{animation}}" class="loading-img"></view>
-
-          <view class="canplay" wx:if="{{playStatus == 0}}" bindtap="canPlayClick"></view>
+          <view class="canplay" bindtap="canPlayClick"></view>
 
         </view>
 
