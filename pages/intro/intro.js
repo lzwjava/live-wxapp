@@ -42,12 +42,12 @@ Page({
         })
 
          wemark.parse(data.speakerIntro, this, {
-           imageWidth: wx.getSystemInfoSync().windowWidth - 40,
+           imageWidth: wx.getSystemInfoSync().windowWidth - 60,
            name: 'wemark'
          })
 
          wemark.parse(data.detail, this, {
-           imageWidth: wx.getSystemInfoSync().windowWidth - 40,
+           imageWidth: wx.getSystemInfoSync().windowWidth - 60,
            name: 'wemarkDetail'
          })
 
@@ -107,7 +107,7 @@ Page({
           amountWord = '¥' + (live.realAmount / 100.0)  +
           ' 原价 ¥' + (live.amount / 100.0)
         } else {
-          amountWord = '¥' + (live.amount / 100.0)  + '（分享朋友圈' + thankWord + ' ）'
+          amountWord = '¥' + (live.amount / 100.0)
         }
         return '赞助并' + statusWord + amountWord
       } else {
