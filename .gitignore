@@ -1,3 +1,4 @@
 node_modules
 .qshell
 .idea
+.DS_Store
