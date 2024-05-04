@@ -4,9 +4,9 @@ Fun Live is a cutting-edge knowledge live broadcast platform designed to facilit
 
 <div align="center">
 
-<img src="./readme/wxapp1.jpg" width="200px" /><img/>
+<img src="./readme/wxapp1.jpg" width="300px" /><img/>
 
-<img src="./readme/wxapp2.jpg" width="200px" /><img/>
+<img src="./readme/wxapp2.jpg" width="300px" /><img/>
 
 </div>
 
